@@ -248,19 +248,29 @@
       margin-bottom: 48px;
     }
 
+    @keyframes manifesto-sweep {
+      0%   { background-position: 0% center; }
+      50%  { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+
     .manifesto {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.9rem, 4vw, 3.4rem);
       font-weight: 400;
       line-height: 1.45;
-      color: var(--nero);
       max-width: 860px;
       margin: 0 auto 56px;
+      background: linear-gradient(90deg, var(--verde), #C2E5FF, var(--marrone), var(--verde));
+      background-size: 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: manifesto-sweep 8s ease infinite;
     }
 
     .manifesto em {
       font-style: italic;
-      color: var(--verde);
     }
 
     .section-brand > p {
