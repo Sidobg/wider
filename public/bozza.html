@@ -369,7 +369,46 @@
     @media (min-width: 1024px) { .prodotti-grid { grid-template-columns: repeat(3, 1fr); } }
 
     /* Card prodotto */
-    .prodotto-card { cursor: pointer; }
+    .prodotto-card {
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Spotlight glow border */
+    .prodotto-card::before,
+    .prodotto-card::after {
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border: 2px solid transparent;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: calc(100% + 4px) calc(100% + 4px);
+      mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+      mask-clip: padding-box, border-box;
+      mask-composite: intersect;
+      -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+      -webkit-mask-clip: padding-box, border-box;
+      -webkit-mask-composite: source-in;
+      z-index: 5;
+    }
+
+    .prodotto-card::before {
+      background-image: radial-gradient(
+        220px 220px at calc(var(--x, -9999) * 1px) calc(var(--y, -9999) * 1px),
+        hsl(calc(145 + var(--xp, 0) * 65) 80% 50% / 1), transparent 100%
+      );
+      filter: brightness(2.2);
+    }
+
+    .prodotto-card::after {
+      background-image: radial-gradient(
+        140px 140px at calc(var(--x, -9999) * 1px) calc(var(--y, -9999) * 1px),
+        hsl(0 0% 100% / 0.75), transparent 100%
+      );
+    }
 
     .prodotto-img-wrapper {
       position: relative;
@@ -996,6 +1035,17 @@
         mainNav.classList.remove('scrolled');
       }
     }, { passive: true });
+
+
+    // ===== SPOTLIGHT GLOW CARDS =====
+    document.addEventListener('pointermove', (e) => {
+      document.querySelectorAll('.prodotto-card').forEach(card => {
+        card.style.setProperty('--x', e.clientX.toFixed(2));
+        card.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
+        card.style.setProperty('--y', e.clientY.toFixed(2));
+        card.style.setProperty('--yp', (e.clientY / window.innerHeight).toFixed(2));
+      });
+    });
 
 
     // ===== FADE ON SCROLL =====
