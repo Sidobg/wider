@@ -71,8 +71,9 @@
       transition: color 0.3s;
     }
 
-    nav:not(.scrolled) .nav-links a { color: rgba(255,253,244,0.85); }
-    nav.scrolled     .nav-links a { color: var(--marrone); }
+    nav:not(.scrolled):not(.video-open) .nav-links a { color: var(--verde); }
+    nav:not(.scrolled).video-open     .nav-links a { color: rgba(255,253,244,0.9); }
+    nav.scrolled                      .nav-links a { color: var(--marrone); }
 
     .nav-cta {
       background: transparent;
@@ -86,8 +87,9 @@
       transition: all 0.3s;
     }
 
-    nav:not(.scrolled) .nav-cta { border-color: rgba(255,253,244,0.7); color: var(--panna); }
-    nav.scrolled       .nav-cta { border-color: var(--verde); color: var(--verde); }
+    nav:not(.scrolled):not(.video-open) .nav-cta { border-color: var(--verde); color: var(--verde); }
+    nav:not(.scrolled).video-open       .nav-cta { border-color: rgba(255,253,244,0.7); color: var(--panna); }
+    nav.scrolled                        .nav-cta { border-color: var(--verde); color: var(--verde); }
 
     nav.scrolled .nav-cta:hover { background: var(--verde); color: var(--panna); }
 
@@ -108,8 +110,9 @@
       transition: background 0.4s;
     }
 
-    nav:not(.scrolled) .hamburger span { background: var(--panna); }
-    nav.scrolled       .hamburger span { background: var(--nero); }
+    nav:not(.scrolled):not(.video-open) .hamburger span { background: var(--verde); }
+    nav:not(.scrolled).video-open       .hamburger span { background: var(--panna); }
+    nav.scrolled                        .hamburger span { background: var(--nero); }
 
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
@@ -985,6 +988,7 @@
     const heroRight     = document.getElementById('heroRight');
     const scrollInd     = document.getElementById('scrollIndicator');
     const videoOverlay  = document.getElementById('videoOverlay');
+    const mainNav       = document.getElementById('mainNav');
 
     function updateHero() {
       const rect = heroWrapper.getBoundingClientRect();
@@ -1017,6 +1021,13 @@
 
       const ov = 0.32 - p * 0.22;
       videoOverlay.style.background = `rgba(4,33,14,${Math.max(0.08, ov)})`;
+
+      // Nav: chiaro quando il video copre lo sfondo, scuro altrimenti
+      if (p > 0.35) {
+        mainNav.classList.add('video-open');
+      } else {
+        mainNav.classList.remove('video-open');
+      }
     }
 
     window.addEventListener('scroll', updateHero, { passive: true });
@@ -1025,7 +1036,6 @@
 
 
     // ===== NAV SCROLL STATE =====
-    const mainNav = document.getElementById('mainNav');
 
     window.addEventListener('scroll', () => {
       const threshold = heroWrapper.offsetHeight - 120;
