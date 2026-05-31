@@ -197,8 +197,20 @@
       letter-spacing: -0.01em;
     }
 
-    @media (max-width: 480px) {
-      .hero-word { font-size: 1.8rem; }
+    @media (max-width: 768px) {
+      .hero-text {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 24px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-word {
+        font-size: clamp(1.7rem, 8vw, 2.6rem);
+        white-space: normal;
+        text-align: center;
+      }
     }
 
     /* Scroll indicator */
@@ -1012,8 +1024,13 @@
       heroBg.style.opacity = (1 - p);
 
       const tx = p * (mob ? 38 : 30);
-      heroLeft.style.transform  = `translateX(-${tx}vw)`;
-      heroRight.style.transform = `translateX(${tx}vw)`;
+      if (mob) {
+        heroLeft.style.transform  = `translateY(-${tx * 0.6}vw)`;
+        heroRight.style.transform = `translateY(${tx * 0.6}vw)`;
+      } else {
+        heroLeft.style.transform  = `translateX(-${tx}vw)`;
+        heroRight.style.transform = `translateX(${tx}vw)`;
+      }
       heroLeft.style.opacity    = Math.max(0, 1 - p * 2.4);
       heroRight.style.opacity   = Math.max(0, 1 - p * 2.4);
 
