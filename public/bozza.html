@@ -201,7 +201,7 @@
     }
 
     .hero-spacer {
-      height: calc(100vh + 100px);
+      height: calc(100vh + 260px);
       position: relative;
     }
 
@@ -1198,7 +1198,7 @@
 
       // Dissolvenza hero: completa in esattamente 100px (= extra spacer)
       if (window.scrollY > vh) {
-        heroSection.style.opacity = Math.max(0, 1 - (window.scrollY - vh) / 100).toString();
+        heroSection.style.opacity = Math.max(0, 1 - (window.scrollY - vh) / 260).toString();
       } else {
         heroSection.style.opacity = '1';
       }
