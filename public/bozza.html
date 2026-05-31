@@ -188,7 +188,7 @@
 
     /* ===== HERO SCROLL EXPANSION ===== */
     .hero-scroll-wrapper {
-      height: 270vh;
+      height: 190vh;
       position: relative;
     }
 
@@ -315,10 +315,14 @@
     /* ===== SEZIONE BRAND / MANIFESTO ===== */
     .section-brand {
       background: var(--panna);
-      padding: 130px 32px;
+      padding: 70px 32px;
       text-align: center;
       position: relative;
       z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+      .section-brand { padding: 48px 24px; }
     }
 
     .label {
@@ -381,6 +385,10 @@
       overflow: hidden;
     }
 
+    @media (max-width: 599px) {
+      .section-valori { padding: 70px 20px; }
+    }
+
     .section-valori .label { color: rgba(255,253,244,0.4); text-align: center; margin-bottom: 64px; }
 
     .valori-grid {
@@ -392,8 +400,16 @@
       margin: 0 auto;
     }
 
-    @media (min-width: 900px) {
-      .valori-grid { grid-template-columns: repeat(4, 1fr); }
+    @media (min-width: 600px)  { .valori-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px)  { .valori-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    @media (max-width: 599px) {
+      .valori-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        width: 100%;
+      }
+      .valore-item { padding: 36px 24px; }
     }
 
     .valore-item {
