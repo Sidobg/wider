@@ -103,22 +103,86 @@
       background: none;
       border: none;
       padding: 4px;
+      z-index: 201;
+      position: relative;
     }
 
     .hamburger span {
       width: 22px; height: 1px;
       display: block;
-      transition: background 0.4s;
+      transition: background 0.4s, transform 0.35s, opacity 0.35s;
+      transform-origin: center;
     }
 
     nav:not(.scrolled):not(.video-open) .hamburger span { background: var(--panna); }
     nav:not(.scrolled).video-open       .hamburger span { background: var(--panna); }
     nav.scrolled                        .hamburger span { background: var(--nero); }
 
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--panna) !important; }
+    .hamburger.open span:nth-child(2) { transform: translateY(-6px) rotate(-45deg); background: var(--panna) !important; }
+
     @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-logo img { height: 52px; width: 52px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
     }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--verde);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      transform: translateY(-100%);
+      transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
+    }
+
+    .mobile-menu.open { transform: translateY(0); }
+
+    @media (max-width: 768px) { .mobile-menu { display: flex; } }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .mobile-menu ul a {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 8vw, 2.4rem);
+      font-weight: 400;
+      color: var(--panna);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .mobile-menu ul a:hover { opacity: 1; }
+
+    .mobile-menu-cta {
+      background: transparent;
+      border: 1px solid rgba(255,253,244,0.5);
+      color: var(--panna);
+      padding: 14px 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu-cta:hover { background: var(--panna); color: var(--verde); }
 
     /* ===== HERO SCROLL EXPANSION ===== */
     .hero-scroll-wrapper {
@@ -824,6 +888,17 @@
     </button>
   </nav>
 
+  <!-- ===== MOBILE MENU ===== -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#brand"      onclick="closeMobileMenu()">Il brand</a></li>
+      <li><a href="#collezione" onclick="closeMobileMenu()">Collezione</a></li>
+      <li><a href="#community"  onclick="closeMobileMenu()">Community</a></li>
+      <li><a href="#about"      onclick="closeMobileMenu()">Chi siamo</a></li>
+    </ul>
+    <button class="mobile-menu-cta" onclick="openModal(); closeMobileMenu()">Richiedi info</button>
+  </div>
+
   <!-- ===== HERO SCROLL EXPANSION ===== -->
   <div class="hero-scroll-wrapper" id="heroWrapper">
     <section class="hero-sticky">
@@ -1122,6 +1197,22 @@
     window.addEventListener('resize', updateHero, { passive: true });
     updateHero();
 
+
+    // ===== MOBILE MENU =====
+    const hamburgerBtn = document.getElementById('hamburger');
+    const mobileMenu   = document.getElementById('mobileMenu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     // ===== NAV SCROLL STATE =====
 
