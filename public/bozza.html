@@ -201,7 +201,7 @@
     }
 
     .hero-spacer {
-      height: 100vh;
+      height: calc(100vh + 100px);
       position: relative;
     }
 
@@ -1196,9 +1196,9 @@
       if (p > 0.35) mainNav.classList.add('video-open');
       else          mainNav.classList.remove('video-open');
 
-      // Dissolvenza hero dopo il completamento dell'animazione
+      // Dissolvenza hero: completa in esattamente 100px (= extra spacer)
       if (window.scrollY > vh) {
-        heroSection.style.opacity = Math.max(0, 1 - (window.scrollY - vh) / 120).toString();
+        heroSection.style.opacity = Math.max(0, 1 - (window.scrollY - vh) / 100).toString();
       } else {
         heroSection.style.opacity = '1';
       }
