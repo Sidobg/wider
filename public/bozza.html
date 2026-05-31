@@ -675,6 +675,34 @@
 
     .form-submit:hover { opacity: 0.82; }
 
+    /* ===== ABOUT ===== */
+    .section-about {
+      background: var(--panna);
+      padding: 130px 32px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--nero);
+      margin: 16px 0 40px;
+    }
+
+    .about-placeholder {
+      font-style: italic;
+      color: rgba(93,84,73,0.5);
+      border: 1px dashed rgba(93,84,73,0.3);
+      padding: 36px 40px;
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
     /* ===== FOOTER ===== */
     footer {
       background: #111;
@@ -766,6 +794,7 @@
       <li><a href="#brand">Il brand</a></li>
       <li><a href="#collezione">Collezione</a></li>
       <li><a href="#community">Community</a></li>
+      <li><a href="#about">Chi siamo</a></li>
     </ul>
     <button class="nav-cta" onclick="openModal()">Richiedi info</button>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -808,6 +837,10 @@
     <div class="divider fade-up"></div>
     <p class="fade-up">
       WIDER nasce come un universo culturale e visivo. Un brand che costruisce un immaginario riconoscibile fatto di estetica, esperienze e comunità. Prima ancora che un prodotto, WIDER è uno status e un senso di appartenenza.
+    </p>
+    <div class="divider fade-up"></div>
+    <p class="fade-up">
+      Il nome è un invito ad ampliare lo sguardo. Guardare oltre i confini, oltre le abitudini, oltre il proprio contesto. WIDER nasce con l'idea di creare connessioni tra persone, spazi e città attraverso un linguaggio visivo contemporaneo — dove ogni capo è una naturale estensione di questa identità.
     </p>
   </section>
 
@@ -927,9 +960,21 @@
       Una comunità prima di un prodotto.
     </h2>
     <p class="fade-up">
-      WIDER costruisce uno spazio culturale contemporaneo dove comunità, territorio e creatività si incontrano. Attraverso eventi, contenuti e collaborazioni.
+      WIDER costruisce uno spazio culturale contemporaneo dove comunità, territorio e creatività si incontrano. Attraverso eventi, contenuti e collaborazioni, il brand crea momenti reali in cui le persone possono riconoscersi e condividere un immaginario comune.
+    </p>
+    <p class="fade-up" style="color:rgba(255,253,244,0.4); font-size:0.88rem; max-width:480px; margin: -20px auto 56px; line-height:1.85;">
+      Gli eventi sono uno dei principali strumenti di costruzione del brand. Prima la desiderabilità, poi il prodotto — la vendita è una conseguenza naturale del valore percepito.
     </p>
     <button class="btn-outline-light fade-up" onclick="openModal()">Entra nella community</button>
+  </section>
+
+  <!-- ===== ABOUT US ===== -->
+  <section class="section-about" id="about">
+    <span class="label fade-up">Chi siamo</span>
+    <h2 class="fade-up">I ragazzi di WIDER</h2>
+    <p class="about-placeholder fade-up">
+      ✏️ Sezione da completare — inserire qui la storia dei fondatori: chi sono, da dove vengono, come è nata l'idea di WIDER e cosa li ha spinti a costruire questo universo.
+    </p>
   </section>
 
   <!-- ===== MODAL FORM ===== -->
