@@ -187,21 +187,22 @@
     .mobile-menu-cta:hover { background: var(--panna); color: var(--verde); }
 
     /* ===== HERO SCROLL EXPANSION ===== */
-    .hero-scroll-wrapper {
-      height: 190vh;
-      position: relative;
-    }
-
-    .hero-sticky {
-      position: sticky;
-      top: 0;
+    .hero-section {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
       height: 100vh;
-      width: 100%;
+      z-index: 50;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       background: var(--verde);
+      transition: opacity 0.35s ease;
+    }
+
+    .hero-spacer {
+      height: 100vh;
+      position: relative;
     }
 
     .hero-bg {
@@ -921,28 +922,27 @@
   </div>
 
   <!-- ===== HERO SCROLL EXPANSION ===== -->
-  <div class="hero-scroll-wrapper" id="heroWrapper">
-    <section class="hero-sticky">
-      <div class="hero-bg" id="heroBg"></div>
+  <section class="hero-section" id="heroSection">
+    <div class="hero-bg" id="heroBg"></div>
 
-      <div class="media-container" id="mediaContainer">
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="/video%20hero.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay" id="videoOverlay"></div>
-      </div>
+    <div class="media-container" id="mediaContainer">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="/video%20hero.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay" id="videoOverlay"></div>
+    </div>
 
-      <div class="hero-text">
-        <span class="hero-word" id="heroLeft">WIDER</span>
-        <span class="hero-word" id="heroRight">è uno spazio aperto.</span>
-      </div>
+    <div class="hero-text">
+      <span class="hero-word" id="heroLeft">WIDER</span>
+      <span class="hero-word" id="heroRight">è uno spazio aperto.</span>
+    </div>
 
-      <div class="scroll-indicator" id="scrollIndicator">
-        <span>scorri per esplorare</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
-  </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+      <span>scorri per esplorare</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+  <div class="hero-spacer"></div>
 
   <!-- ===== BRAND / MANIFESTO ===== -->
   <section class="section-brand" id="brand">
@@ -1160,7 +1160,7 @@
   <script>
 
     // ===== HERO SCROLL EXPANSION =====
-    const heroWrapper   = document.getElementById('heroWrapper');
+    const heroSection  = document.getElementById('heroSection');
     const mediaContainer = document.getElementById('mediaContainer');
     const heroBg        = document.getElementById('heroBg');
     const heroLeft      = document.getElementById('heroLeft');
@@ -1170,47 +1170,37 @@
     const mainNav       = document.getElementById('mainNav');
 
     function updateHero() {
-      const rect = heroWrapper.getBoundingClientRect();
-      const scrollable = heroWrapper.offsetHeight - window.innerHeight;
-      const scrolled   = -rect.top;
-      const p = Math.max(0, Math.min(scrolled / scrollable, 1)); // progress 0→1
+      const vh = window.innerHeight;
+      const p  = Math.min(window.scrollY / vh, 1); // 0→1 in esattamente 100vh di scroll
 
       const mob  = window.innerWidth < 768;
+      const vw   = window.innerWidth;
       const startW = mob ? 240 : 300;
       const startH = mob ? 340 : 420;
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
 
-      const w = startW + p * (vw - startW);
-      const h = startH + p * (vh - startH);
-
-      mediaContainer.style.width        = Math.min(w, vw) + 'px';
-      mediaContainer.style.height       = Math.min(h, vh) + 'px';
+      mediaContainer.style.width        = Math.min(startW + p * (vw - startW), vw) + 'px';
+      mediaContainer.style.height       = Math.min(startH + p * (vh - startH), vh) + 'px';
       mediaContainer.style.borderRadius = (20 * (1 - p)) + 'px';
 
       heroBg.style.opacity = (1 - p);
 
       const tx = p * (mob ? 38 : 30);
-      if (mob) {
-        heroLeft.style.transform  = `translateY(-${tx * 0.6}vw)`;
-        heroRight.style.transform = `translateY(${tx * 0.6}vw)`;
-      } else {
-        heroLeft.style.transform  = `translateX(-${tx}vw)`;
-        heroRight.style.transform = `translateX(${tx}vw)`;
-      }
+      heroLeft.style.transform  = mob ? `translateY(-${tx * 0.6}vw)` : `translateX(-${tx}vw)`;
+      heroRight.style.transform = mob ? `translateY(${tx * 0.6}vw)`  : `translateX(${tx}vw)`;
       heroLeft.style.opacity    = Math.max(0, 1 - p * 2.4);
       heroRight.style.opacity   = Math.max(0, 1 - p * 2.4);
+      scrollInd.style.opacity   = Math.max(0, 1 - p * 5);
 
-      scrollInd.style.opacity = Math.max(0, 1 - p * 5);
+      videoOverlay.style.background = `rgba(4,33,14,${Math.max(0.08, 0.32 - p * 0.22)})`;
 
-      const ov = 0.32 - p * 0.22;
-      videoOverlay.style.background = `rgba(4,33,14,${Math.max(0.08, ov)})`;
+      if (p > 0.35) mainNav.classList.add('video-open');
+      else          mainNav.classList.remove('video-open');
 
-      // Nav: chiaro quando il video copre lo sfondo, scuro altrimenti
-      if (p > 0.35) {
-        mainNav.classList.add('video-open');
+      // Dissolvenza hero dopo il completamento dell'animazione
+      if (window.scrollY > vh) {
+        heroSection.style.opacity = Math.max(0, 1 - (window.scrollY - vh) / 120).toString();
       } else {
-        mainNav.classList.remove('video-open');
+        heroSection.style.opacity = '1';
       }
     }
 
@@ -1238,7 +1228,7 @@
     // ===== NAV SCROLL STATE =====
 
     window.addEventListener('scroll', () => {
-      const threshold = heroWrapper.offsetHeight - 120;
+      const threshold = window.innerHeight - 120;
       if (window.scrollY > threshold) {
         mainNav.classList.add('scrolled');
       } else {
