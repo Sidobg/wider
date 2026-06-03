@@ -7,13 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <style>
 
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { overflow-x: hidden; max-width: 100vw; }
 
     :root {
       --verde:   #04210E;
@@ -53,10 +50,10 @@
     }
 
     .nav-logo img {
-      height: 100px;
-      width: 100px;
+      height: 44px;
+      width: 44px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 8px;
     }
 
     .nav-links {
@@ -74,9 +71,8 @@
       transition: color 0.3s;
     }
 
-    nav:not(.scrolled):not(.video-open) .nav-links a { color: var(--panna); }
-    nav:not(.scrolled).video-open     .nav-links a { color: rgba(255,253,244,0.9); }
-    nav.scrolled                      .nav-links a { color: var(--marrone); }
+    nav:not(.scrolled) .nav-links a { color: rgba(255,253,244,0.85); }
+    nav.scrolled     .nav-links a { color: var(--marrone); }
 
     .nav-cta {
       background: transparent;
@@ -90,9 +86,8 @@
       transition: all 0.3s;
     }
 
-    nav:not(.scrolled):not(.video-open) .nav-cta { border-color: var(--panna); color: var(--panna); }
-    nav:not(.scrolled).video-open       .nav-cta { border-color: rgba(255,253,244,0.7); color: var(--panna); }
-    nav.scrolled                        .nav-cta { border-color: var(--verde); color: var(--verde); }
+    nav:not(.scrolled) .nav-cta { border-color: rgba(255,253,244,0.7); color: var(--panna); }
+    nav.scrolled       .nav-cta { border-color: var(--verde); color: var(--verde); }
 
     nav.scrolled .nav-cta:hover { background: var(--verde); color: var(--panna); }
 
@@ -105,110 +100,45 @@
       background: none;
       border: none;
       padding: 4px;
-      z-index: 201;
-      position: relative;
     }
 
     .hamburger span {
       width: 22px; height: 1px;
       display: block;
-      transition: background 0.4s, transform 0.35s, opacity 0.35s;
-      transform-origin: center;
+      transition: background 0.4s;
     }
 
-    nav:not(.scrolled):not(.video-open) .hamburger span { background: var(--panna); }
-    nav:not(.scrolled).video-open       .hamburger span { background: var(--panna); }
-    nav.scrolled                        .hamburger span { background: var(--nero); }
-
-    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--panna) !important; }
-    .hamburger.open span:nth-child(2) { transform: translateY(-6px) rotate(-45deg); background: var(--panna) !important; }
+    nav:not(.scrolled) .hamburger span { background: var(--panna); }
+    nav.scrolled       .hamburger span { background: var(--nero); }
 
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .nav-logo img { height: 52px; width: 52px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
     }
 
-    /* ===== MOBILE MENU ===== */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--verde);
-      z-index: 200;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      transform: translateY(-100%);
-      transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
-    }
-
-    .mobile-menu.open { transform: translateY(0); }
-
-    @media (max-width: 768px) { .mobile-menu { display: flex; } }
-
-    .mobile-menu ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .mobile-menu ul a {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 8vw, 2.4rem);
-      font-weight: 400;
-      color: var(--panna);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      opacity: 0.9;
-      transition: opacity 0.2s;
-    }
-
-    .mobile-menu ul a:hover { opacity: 1; }
-
-    .mobile-menu-cta {
-      background: transparent;
-      border: 1px solid rgba(255,253,244,0.5);
-      color: var(--panna);
-      padding: 14px 36px;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .mobile-menu-cta:hover { background: var(--panna); color: var(--verde); }
-
     /* ===== HERO SCROLL EXPANSION ===== */
-    .hero-section {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
+    .hero-scroll-wrapper {
+      height: 300vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
       height: 100vh;
-      z-index: 50;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: var(--verde);
-      transition: opacity 0.35s ease;
-    }
-
-    .hero-spacer {
-      height: calc(100vh + 260px);
-      position: relative;
+      background: var(--panna);
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: var(--verde);
+      background: var(--panna);
       z-index: 0;
     }
 
@@ -244,16 +174,13 @@
     /* Testo hero */
     .hero-text {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       z-index: 3;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 5vw 0 25vw;
+      padding: 0 5vw;
       pointer-events: none;
-      mix-blend-mode: difference;
     }
 
     .hero-word {
@@ -265,20 +192,8 @@
       letter-spacing: -0.01em;
     }
 
-    @media (max-width: 768px) {
-      .hero-text {
-        flex-direction: column;
-        gap: 10px;
-        padding: 0 24px;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
-      .hero-word {
-        font-size: clamp(1.7rem, 8vw, 2.6rem);
-        white-space: normal;
-        text-align: center;
-      }
+    @media (max-width: 480px) {
+      .hero-word { font-size: 1.8rem; }
     }
 
     /* Scroll indicator */
@@ -313,17 +228,21 @@
       50%       { opacity: 1;   transform: scaleY(1); }
     }
 
+    /* Separatore fisico tra hero e manifesto */
+    .hero-separator {
+      background: var(--panna);
+      height: 160px;
+      position: relative;
+      z-index: 20;
+    }
+
     /* ===== SEZIONE BRAND / MANIFESTO ===== */
     .section-brand {
       background: var(--panna);
-      padding: 70px 32px;
+      padding: 80px 32px 130px;
       text-align: center;
       position: relative;
-      z-index: 10;
-    }
-
-    @media (max-width: 768px) {
-      .section-brand { padding: 48px 24px; }
+      z-index: 20;
     }
 
     .label {
@@ -335,29 +254,19 @@
       margin-bottom: 48px;
     }
 
-    @keyframes manifesto-sweep {
-      0%   { background-position: 0% center; }
-      50%  { background-position: 100% center; }
-      100% { background-position: 0% center; }
-    }
-
     .manifesto {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.9rem, 4vw, 3.4rem);
       font-weight: 400;
       line-height: 1.45;
+      color: var(--nero);
       max-width: 860px;
       margin: 0 auto 56px;
-      background: linear-gradient(90deg, var(--verde), #C2E5FF, var(--marrone), var(--verde));
-      background-size: 300%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: manifesto-sweep 8s ease infinite;
     }
 
     .manifesto em {
       font-style: italic;
+      color: var(--verde);
     }
 
     .section-brand > p {
@@ -375,19 +284,12 @@
       opacity: 0.3;
     }
 
-    .section-brand .divider { margin: 28px auto; }
-
     /* ===== VALORI ===== */
     .section-valori {
       background: var(--verde);
       padding: 110px 32px;
       position: relative;
       z-index: 10;
-      overflow: hidden;
-    }
-
-    @media (max-width: 599px) {
-      .section-valori { padding: 70px 20px; }
     }
 
     .section-valori .label { color: rgba(255,253,244,0.4); text-align: center; margin-bottom: 64px; }
@@ -401,16 +303,8 @@
       margin: 0 auto;
     }
 
-    @media (min-width: 600px)  { .valori-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 900px)  { .valori-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    @media (max-width: 599px) {
-      .valori-grid {
-        grid-template-columns: 1fr;
-        max-width: 100%;
-        width: 100%;
-      }
-      .valore-item { padding: 36px 24px; }
+    @media (min-width: 900px) {
+      .valori-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
     .valore-item {
@@ -430,27 +324,6 @@
       font-size: 0.83rem;
       line-height: 1.75;
       color: rgba(255,253,244,0.5);
-    }
-
-    /* ===== AURORA VALORI ===== */
-    #auroraCanvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    #auroraCanvas canvas {
-      display: block;
-      position: absolute;
-      inset: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-    .section-valori .label,
-    .valori-grid {
-      position: relative;
-      z-index: 1;
     }
 
     /* ===== COLLEZIONE ===== */
@@ -492,46 +365,7 @@
     @media (min-width: 1024px) { .prodotti-grid { grid-template-columns: repeat(3, 1fr); } }
 
     /* Card prodotto */
-    .prodotto-card {
-      cursor: pointer;
-      position: relative;
-    }
-
-    /* Spotlight glow border */
-    .prodotto-card::before,
-    .prodotto-card::after {
-      pointer-events: none;
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border: 2px solid transparent;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
-      background-size: calc(100% + 4px) calc(100% + 4px);
-      mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-      mask-clip: padding-box, border-box;
-      mask-composite: intersect;
-      -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-      -webkit-mask-clip: padding-box, border-box;
-      -webkit-mask-composite: source-in;
-      z-index: 5;
-    }
-
-    .prodotto-card::before {
-      background-image: radial-gradient(
-        220px 220px at calc(var(--x, -9999) * 1px) calc(var(--y, -9999) * 1px),
-        hsl(calc(145 + var(--xp, 0) * 65) 80% 50% / 1), transparent 100%
-      );
-      filter: brightness(2.2);
-    }
-
-    .prodotto-card::after {
-      background-image: radial-gradient(
-        140px 140px at calc(var(--x, -9999) * 1px) calc(var(--y, -9999) * 1px),
-        hsl(0 0% 100% / 0.75), transparent 100%
-      );
-    }
+    .prodotto-card { cursor: pointer; }
 
     .prodotto-img-wrapper {
       position: relative;
@@ -783,40 +617,12 @@
 
     .form-submit:hover { opacity: 0.82; }
 
-    /* ===== ABOUT ===== */
-    .section-about {
-      background: var(--panna);
-      padding: 130px 32px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .section-about h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      color: var(--nero);
-      margin: 16px 0 40px;
-    }
-
-    .about-placeholder {
-      font-style: italic;
-      color: rgba(93,84,73,0.5);
-      border: 1px dashed rgba(93,84,73,0.3);
-      padding: 36px 40px;
-      max-width: 680px;
-      margin: 0 auto;
-      font-size: 0.95rem;
-      line-height: 1.8;
-    }
-
     /* ===== FOOTER ===== */
     footer {
       background: #111;
       padding: 70px 32px 40px;
       position: relative;
-      z-index: 10;
+      z-index: 20;
     }
 
     .footer-inner {
@@ -896,13 +702,12 @@
   <!-- ===== NAV ===== -->
   <nav id="mainNav">
     <div class="nav-logo">
-      <img src="/logo.jpg" alt="WIDER">
+      <img src="./public/logo.jpg" alt="WIDER">
     </div>
     <ul class="nav-links">
       <li><a href="#brand">Il brand</a></li>
       <li><a href="#collezione">Collezione</a></li>
       <li><a href="#community">Community</a></li>
-      <li><a href="#about">Chi siamo</a></li>
     </ul>
     <button class="nav-cta" onclick="openModal()">Richiedi info</button>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -910,39 +715,32 @@
     </button>
   </nav>
 
-  <!-- ===== MOBILE MENU ===== -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="#brand"      onclick="closeMobileMenu()">Il brand</a></li>
-      <li><a href="#collezione" onclick="closeMobileMenu()">Collezione</a></li>
-      <li><a href="#community"  onclick="closeMobileMenu()">Community</a></li>
-      <li><a href="#about"      onclick="closeMobileMenu()">Chi siamo</a></li>
-    </ul>
-    <button class="mobile-menu-cta" onclick="openModal(); closeMobileMenu()">Richiedi info</button>
+  <!-- ===== HERO SCROLL EXPANSION ===== -->
+  <div class="hero-scroll-wrapper" id="heroWrapper">
+    <section class="hero-sticky">
+      <div class="hero-bg" id="heroBg"></div>
+
+      <div class="media-container" id="mediaContainer">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="./public/video hero.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay" id="videoOverlay"></div>
+      </div>
+
+      <div class="hero-text">
+        <span class="hero-word" id="heroLeft">WIDER</span>
+        <span class="hero-word" id="heroRight">è uno spazio aperto.</span>
+      </div>
+
+      <div class="scroll-indicator" id="scrollIndicator">
+        <span>scorri per esplorare</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
   </div>
 
-  <!-- ===== HERO SCROLL EXPANSION ===== -->
-  <section class="hero-section" id="heroSection">
-    <div class="hero-bg" id="heroBg"></div>
-
-    <div class="media-container" id="mediaContainer">
-      <video autoplay muted loop playsinline preload="auto">
-        <source src="/video%20hero.mp4" type="video/mp4">
-      </video>
-      <div class="video-overlay" id="videoOverlay"></div>
-    </div>
-
-    <div class="hero-text">
-      <span class="hero-word" id="heroLeft">WIDER</span>
-      <span class="hero-word" id="heroRight">è uno spazio aperto.</span>
-    </div>
-
-    <div class="scroll-indicator" id="scrollIndicator">
-      <span>scorri per esplorare</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-  <div class="hero-spacer"></div>
+  <!-- Separatore fisico hero → manifesto -->
+  <div class="hero-separator"></div>
 
   <!-- ===== BRAND / MANIFESTO ===== -->
   <section class="section-brand" id="brand">
@@ -956,15 +754,10 @@
     <p class="fade-up">
       WIDER nasce come un universo culturale e visivo. Un brand che costruisce un immaginario riconoscibile fatto di estetica, esperienze e comunità. Prima ancora che un prodotto, WIDER è uno status e un senso di appartenenza.
     </p>
-    <div class="divider fade-up"></div>
-    <p class="fade-up">
-      Il nome è un invito ad ampliare lo sguardo. Guardare oltre i confini, oltre le abitudini, oltre il proprio contesto. WIDER nasce con l'idea di creare connessioni tra persone, spazi e città attraverso un linguaggio visivo contemporaneo — dove ogni capo è una naturale estensione di questa identità.
-    </p>
   </section>
 
   <!-- ===== VALORI ===== -->
   <section class="section-valori">
-    <div id="auroraCanvas"></div>
     <span class="label fade-up">I valori</span>
     <div class="valori-grid">
       <div class="valore-item fade-up">
@@ -1079,24 +872,9 @@
       Una comunità prima di un prodotto.
     </h2>
     <p class="fade-up">
-      WIDER costruisce uno spazio culturale contemporaneo dove comunità, territorio e creatività si incontrano. Attraverso eventi, contenuti e collaborazioni, il brand crea momenti reali in cui le persone possono riconoscersi e condividere un immaginario comune.
+      WIDER costruisce uno spazio culturale contemporaneo dove comunità, territorio e creatività si incontrano. Attraverso eventi, contenuti e collaborazioni.
     </p>
-    <p class="fade-up" style="color:rgba(255,253,244,0.4); font-size:0.88rem; max-width:480px; margin: -20px auto 56px; line-height:1.85;">
-      Gli eventi sono uno dei principali strumenti di costruzione del brand. Prima la desiderabilità, poi il prodotto — la vendita è una conseguenza naturale del valore percepito.
-    </p>
-    <div class="fade-up" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-      <button class="btn-outline-light" onclick="openModal()">Entra nella community</button>
-      <a class="btn-outline-light" href="https://www.instagram.com/weare.wider/" target="_blank" rel="noopener">Scopri i nostri eventi</a>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT US ===== -->
-  <section class="section-about" id="about">
-    <span class="label fade-up">Chi siamo</span>
-    <h2 class="fade-up">I ragazzi di WIDER</h2>
-    <p class="about-placeholder fade-up">
-      ✏️ Sezione da completare — inserire qui la storia dei fondatori: chi sono, da dove vengono, come è nata l'idea di WIDER e cosa li ha spinti a costruire questo universo.
-    </p>
+    <a class="btn-outline-light fade-up" href="https://www.instagram.com/weare.wider" target="_blank" rel="noopener">Scopri i nostri eventi</a>
   </section>
 
   <!-- ===== MODAL FORM ===== -->
@@ -1141,10 +919,10 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="/logo.jpg" alt="WIDER">
+        <img src="./public/logo.jpg" alt="WIDER">
       </div>
       <ul class="footer-links">
-        <li><a href="https://www.instagram.com/weare.wider/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.instagram.com/weare.wider" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="#brand">Il brand</a></li>
         <li><a href="#collezione">Collezione</a></li>
         <li><a href="#community">Community</a></li>
@@ -1152,7 +930,7 @@
       <div class="footer-divider"></div>
       <div class="footer-bottom">
         <p>© 2025 WIDER. Tutti i diritti riservati.</p>
-        <p style="color:rgba(255,253,244,0.12); font-size:10px; letter-spacing:0.08em;">Sito realizzato da <a href="https://www.futureai.it" target="_blank" rel="noopener" style="color:rgba(255,253,244,0.2); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,253,244,0.6)'" onmouseout="this.style.color='rgba(255,253,244,0.2)'">FUTURE AI</a></p>
+        <p>Un universo da vivere prima ancora che da indossare.</p>
       </div>
     </div>
   </footer>
@@ -1160,48 +938,45 @@
   <script>
 
     // ===== HERO SCROLL EXPANSION =====
-    const heroSection  = document.getElementById('heroSection');
+    const heroWrapper   = document.getElementById('heroWrapper');
     const mediaContainer = document.getElementById('mediaContainer');
     const heroBg        = document.getElementById('heroBg');
     const heroLeft      = document.getElementById('heroLeft');
     const heroRight     = document.getElementById('heroRight');
     const scrollInd     = document.getElementById('scrollIndicator');
     const videoOverlay  = document.getElementById('videoOverlay');
-    const mainNav       = document.getElementById('mainNav');
 
     function updateHero() {
-      const vh = window.innerHeight;
-      const p  = Math.min(window.scrollY / vh, 1); // 0→1 in esattamente 100vh di scroll
+      const rect = heroWrapper.getBoundingClientRect();
+      const scrollable = heroWrapper.offsetHeight - window.innerHeight;
+      const scrolled   = -rect.top;
+      const p = Math.max(0, Math.min(scrolled / scrollable, 1)); // progress 0→1
 
       const mob  = window.innerWidth < 768;
-      const vw   = window.innerWidth;
       const startW = mob ? 240 : 300;
       const startH = mob ? 340 : 420;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
 
-      mediaContainer.style.width        = Math.min(startW + p * (vw - startW), vw) + 'px';
-      mediaContainer.style.height       = Math.min(startH + p * (vh - startH), vh) + 'px';
+      const w = startW + p * (vw - startW);
+      const h = startH + p * (vh - startH);
+
+      mediaContainer.style.width        = Math.min(w, vw) + 'px';
+      mediaContainer.style.height       = Math.min(h, vh) + 'px';
       mediaContainer.style.borderRadius = (20 * (1 - p)) + 'px';
 
       heroBg.style.opacity = (1 - p);
 
       const tx = p * (mob ? 38 : 30);
-      heroLeft.style.transform  = mob ? `translateY(-${tx * 0.6}vw)` : `translateX(-${tx}vw)`;
-      heroRight.style.transform = mob ? `translateY(${tx * 0.6}vw)`  : `translateX(${tx}vw)`;
+      heroLeft.style.transform  = `translateX(-${tx}vw)`;
+      heroRight.style.transform = `translateX(${tx}vw)`;
       heroLeft.style.opacity    = Math.max(0, 1 - p * 2.4);
       heroRight.style.opacity   = Math.max(0, 1 - p * 2.4);
-      scrollInd.style.opacity   = Math.max(0, 1 - p * 5);
 
-      videoOverlay.style.background = `rgba(4,33,14,${Math.max(0.08, 0.32 - p * 0.22)})`;
+      scrollInd.style.opacity = Math.max(0, 1 - p * 5);
 
-      if (p > 0.35) mainNav.classList.add('video-open');
-      else          mainNav.classList.remove('video-open');
-
-      // Dissolvenza hero: completa in esattamente 100px (= extra spacer)
-      if (window.scrollY > vh) {
-        heroSection.style.opacity = Math.max(0, 1 - (window.scrollY - vh) / 260).toString();
-      } else {
-        heroSection.style.opacity = '1';
-      }
+      const ov = 0.32 - p * 0.22;
+      videoOverlay.style.background = `rgba(4,33,14,${Math.max(0.08, ov)})`;
     }
 
     window.addEventListener('scroll', updateHero, { passive: true });
@@ -1209,43 +984,17 @@
     updateHero();
 
 
-    // ===== MOBILE MENU =====
-    const hamburgerBtn = document.getElementById('hamburger');
-    const mobileMenu   = document.getElementById('mobileMenu');
-
-    hamburgerBtn.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburgerBtn.classList.toggle('open', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    function closeMobileMenu() {
-      mobileMenu.classList.remove('open');
-      hamburgerBtn.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
     // ===== NAV SCROLL STATE =====
+    const mainNav = document.getElementById('mainNav');
 
     window.addEventListener('scroll', () => {
-      const threshold = window.innerHeight - 120;
+      const threshold = heroWrapper.offsetHeight - 120;
       if (window.scrollY > threshold) {
         mainNav.classList.add('scrolled');
       } else {
         mainNav.classList.remove('scrolled');
       }
     }, { passive: true });
-
-
-    // ===== SPOTLIGHT GLOW CARDS =====
-    document.addEventListener('pointermove', (e) => {
-      document.querySelectorAll('.prodotto-card').forEach(card => {
-        card.style.setProperty('--x', e.clientX.toFixed(2));
-        card.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
-        card.style.setProperty('--y', e.clientY.toFixed(2));
-        card.style.setProperty('--yp', (e.clientY / window.innerHeight).toFixed(2));
-      });
-    });
 
 
     // ===== FADE ON SCROLL =====
@@ -1287,105 +1036,6 @@
       closeModal();
     }
 
-  </script>
-
-  <script>
-    // ===== AURORA BOREALIS — sezione valori =====
-    (function () {
-      const container = document.getElementById('auroraCanvas');
-      if (!container || typeof THREE === 'undefined') return;
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      container.appendChild(renderer.domElement);
-
-      const scene  = new THREE.Scene();
-      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-      const clock  = new THREE.Clock();
-
-      const vertexShader = `
-        void main() { gl_Position = vec4(position, 1.0); }
-      `;
-
-      const fragmentShader = `
-        precision highp float;
-        uniform vec2  iResolution;
-        uniform float iTime;
-        uniform vec2  iMouse;
-
-        float random(vec2 st) {
-          return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
-        }
-        float noise(vec2 p) {
-          vec2 i = floor(p), f = fract(p);
-          vec2 u = f * f * (3.0 - 2.0 * f);
-          return mix(
-            mix(random(i), random(i + vec2(1.0, 0.0)), u.x),
-            mix(random(i + vec2(0.0, 1.0)), random(i + vec2(1.0, 1.0)), u.x),
-            u.y
-          );
-        }
-        float fbm(vec2 p) {
-          float v = 0.0, a = 0.5;
-          for (int i = 0; i < 5; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
-          return v;
-        }
-
-        void main() {
-          vec2 uv    = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
-          vec2 mouse = (iMouse          - 0.5 * iResolution.xy) / iResolution.y;
-          float t = iTime * 0.12;
-
-          vec2 p = uv;
-          p.y += 0.3;
-          float f       = fbm(vec2(p.x * 2.0, p.y + t));
-          float curtain = smoothstep(0.05, 0.45, f) * (1.0 - p.y * 0.8);
-
-          float d     = length(uv - mouse);
-          float flare = smoothstep(0.35, 0.0, d);
-
-          // Palette WIDER: panna #FFFDF4 e azzurro #C2E5FF
-          vec3 c1 = vec3(1.0,  0.992, 0.957); // panna
-          vec3 c2 = vec3(0.761, 0.898, 1.0);  // azzurro
-          vec3 fc = vec3(1.0,  0.992, 0.957); // flare panna
-
-          vec3 color = mix(c1, c2, clamp(p.y + 0.5, 0.0, 1.0)) * curtain * 0.55;
-          color += fc * flare * curtain * 1.8;
-
-          gl_FragColor = vec4(color, curtain * 0.45);
-        }
-      `;
-
-      const uniforms = {
-        iTime:       { value: 0 },
-        iResolution: { value: new THREE.Vector2() },
-        iMouse:      { value: new THREE.Vector2(-9999, -9999) }
-      };
-
-      const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms, transparent: true });
-      scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
-
-      const onResize = () => {
-        const w = container.clientWidth, h = container.clientHeight;
-        renderer.setSize(w, h, false); // false = non sovrascrivere CSS
-        uniforms.iResolution.value.set(w, h);
-      };
-      window.addEventListener('resize', onResize, { passive: true });
-      onResize();
-
-      window.addEventListener('mousemove', (e) => {
-        const rect = container.getBoundingClientRect();
-        uniforms.iMouse.value.set(
-          e.clientX - rect.left,
-          container.clientHeight - (e.clientY - rect.top)
-        );
-      }, { passive: true });
-
-      renderer.setAnimationLoop(() => {
-        uniforms.iTime.value = clock.getElapsedTime();
-        renderer.render(scene, camera);
-      });
-    })();
   </script>
 </body>
 </html>
