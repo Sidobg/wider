@@ -231,6 +231,8 @@
       transition: background 0.1s;
     }
 
+    #heroLeft { width: clamp(280px, 32vw, 520px); }
+
     /* Testo hero */
     .hero-text {
       position: absolute;
@@ -255,7 +257,7 @@
 
     @media (max-width: 768px) {
       .hero-text { padding: 0 5vw; }
-      #heroLeft  { margin-left: 0 !important; font-size: clamp(2.6rem, 11vw, 3.8rem) !important; }
+      #heroLeft  { margin-left: 0 !important; width: clamp(160px, 52vw, 260px) !important; }
       #heroRight { font-size: clamp(1.2rem, 5vw, 1.6rem) !important; white-space: nowrap !important; max-width: none !important; text-align: right; margin-right: 8vw; }
     }
 
@@ -820,7 +822,7 @@
       </div>
 
       <div class="hero-text">
-        <img id="heroLeft" src="./wider-scritta.png" alt="Wider" style="margin-left: 10vw; width: clamp(180px, 22vw, 360px); object-fit: contain; filter: brightness(0) invert(1);"">
+        <img id="heroLeft" src="./wider-scritta.png" alt="Wider" style="margin-left: 10vw; object-fit: contain; filter: brightness(0) invert(1);">
         <span class="hero-word" id="heroRight">è uno spazio aperto.</span>
       </div>
 
