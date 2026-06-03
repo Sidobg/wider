@@ -112,8 +112,65 @@
     nav.scrolled       .hamburger span { background: var(--nero); }
 
     @media (max-width: 768px) {
+      nav { padding: 10px 18px; }
+      .nav-logo img { height: 46px; width: 46px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--verde);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 18px; right: 22px;
+      background: none;
+      border: none;
+      color: var(--panna);
+      font-size: 30px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--panna);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      opacity: 0.9;
+    }
+
+    .mobile-menu-cta-btn {
+      margin-top: 12px;
+      border: 1px solid rgba(255,253,244,0.5);
+      color: var(--panna);
+      background: transparent;
+      padding: 14px 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
     /* ===== HERO SCROLL EXPANSION ===== */
@@ -193,8 +250,10 @@
       letter-spacing: -0.01em;
     }
 
-    @media (max-width: 480px) {
-      .hero-word { font-size: 1.8rem; }
+    @media (max-width: 768px) {
+      .hero-text { padding: 0 5vw; }
+      #heroLeft  { margin-left: 0 !important; font-size: clamp(2.6rem, 11vw, 3.8rem) !important; }
+      #heroRight { font-size: clamp(1rem, 4.5vw, 1.5rem) !important; white-space: normal; max-width: 42vw; text-align: right; line-height: 1.3; }
     }
 
     /* Scroll indicator */
@@ -916,6 +975,15 @@
     </div>
   </div>
 
+  <!-- ===== MOBILE MENU ===== -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose">&#215;</button>
+    <a href="#brand"      onclick="closeMobileMenu()">Il brand</a>
+    <a href="#collezione" onclick="closeMobileMenu()">Collezione</a>
+    <a href="#community"  onclick="closeMobileMenu()">Community</a>
+    <button class="mobile-menu-cta-btn" onclick="closeMobileMenu(); openModal();">Richiedi info</button>
+  </div>
+
   <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-inner">
@@ -996,6 +1064,25 @@
         mainNav.classList.remove('scrolled');
       }
     }, { passive: true });
+
+
+    // ===== MOBILE MENU =====
+    const hamburger    = document.getElementById('hamburger');
+    const mobileMenu   = document.getElementById('mobileMenu');
+    const menuClose    = document.getElementById('mobileMenuClose');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMobileMenu);
+    menuClose.addEventListener('click', closeMobileMenu);
 
 
     // ===== FADE ON SCROLL =====
