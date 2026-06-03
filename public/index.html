@@ -112,11 +112,12 @@
     nav.scrolled       .hamburger span { background: var(--nero); }
 
     @media (max-width: 768px) {
-      nav { padding: 8px 14px; gap: 6px; }
-      .nav-logo img { height: 40px; width: 40px; }
-      .nav-links { display: flex; gap: 14px; }
+      nav { padding: 8px 16px 4px; flex-wrap: wrap; gap: 0; align-items: center; }
+      .nav-logo { order: 1; }
+      .nav-logo img { height: 52px; width: 52px; }
+      .nav-cta { order: 2; display: block; padding: 7px 13px; font-size: 9px; letter-spacing: 0.08em; }
+      .nav-links { order: 3; display: flex; width: 100%; justify-content: center; gap: 22px; padding: 6px 0 4px; }
       .nav-links a { font-size: 9px; letter-spacing: 0.08em; }
-      .nav-cta { display: block; padding: 7px 12px; font-size: 9px; letter-spacing: 0.08em; }
       .hamburger { display: none; }
     }
 
@@ -255,7 +256,7 @@
     @media (max-width: 768px) {
       .hero-text { padding: 0 5vw; }
       #heroLeft  { margin-left: 0 !important; font-size: clamp(2.6rem, 11vw, 3.8rem) !important; }
-      #heroRight { font-size: clamp(1.3rem, 5.5vw, 1.9rem) !important; white-space: normal; max-width: 42vw; text-align: right; line-height: 1.3; }
+      #heroRight { font-size: clamp(1.1rem, 4.5vw, 1.5rem) !important; white-space: nowrap !important; max-width: none !important; text-align: right; }
     }
 
     /* Scroll indicator */
