@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WIDER — Un universo da vivere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --verde:   #04210E;
+      --panna:   #FFFDF4;
+      --azzurro: #C2E5FF;
+      --marrone: #5D5449;
+      --nero:    #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--panna);
+      color: var(--nero);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    nav.scrolled {
+      background: var(--panna);
+      box-shadow: 0 1px 0 rgba(93,84,73,0.12);
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: 44px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav:not(.scrolled) .nav-links a { color: rgba(255,253,244,0.85); }
+    nav.scrolled     .nav-links a { color: var(--marrone); }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid;
+      padding: 9px 22px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    nav:not(.scrolled) .nav-cta { border-color: rgba(255,253,244,0.7); color: var(--panna); }
+    nav.scrolled       .nav-cta { border-color: var(--verde); color: var(--verde); }
+
+    nav.scrolled .nav-cta:hover { background: var(--verde); color: var(--panna); }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 22px; height: 1px;
+      display: block;
+      transition: background 0.4s;
+    }
+
+    nav:not(.scrolled) .hamburger span { background: var(--panna); }
+    nav.scrolled       .hamburger span { background: var(--nero); }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ===== HERO SCROLL EXPANSION ===== */
+    .hero-scroll-wrapper {
+      height: 340vh;
+      position: relative;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--panna);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--panna);
+      z-index: 0;
+    }
+
+    .media-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+      z-index: 2;
+      box-shadow: 0 24px 80px rgba(4,33,14,0.25);
+    }
+
+    @media (max-width: 768px) {
+      .media-container { width: 240px; height: 340px; }
+    }
+
+    .media-container video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(4,33,14,0.32);
+      transition: background 0.1s;
+    }
+
+    /* Testo hero */
+    .hero-text {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      pointer-events: none;
+      mix-blend-mode: difference;
+    }
+
+    .hero-word {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+      font-weight: 700;
+      color: var(--panna);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    @media (max-width: 480px) {
+      .hero-word { font-size: 1.8rem; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      mix-blend-mode: difference;
+    }
+
+    .scroll-indicator span {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--panna);
+    }
+
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: var(--panna);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50%       { opacity: 1;   transform: scaleY(1); }
+    }
+
+    /* ===== SEZIONE BRAND / MANIFESTO ===== */
+    .section-brand {
+      background: var(--panna);
+      padding: 220px 32px 130px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--marrone);
+      margin-bottom: 48px;
+    }
+
+    .manifesto {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--nero);
+      max-width: 860px;
+      margin: 0 auto 56px;
+    }
+
+    .manifesto em {
+      font-style: italic;
+      color: var(--verde);
+    }
+
+    .section-brand > p {
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+      line-height: 1.85;
+      color: var(--marrone);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      width: 48px; height: 1px;
+      background: var(--marrone);
+      margin: 56px auto;
+      opacity: 0.3;
+    }
+
+    /* ===== VALORI ===== */
+    .section-valori {
+      background: var(--verde);
+      padding: 110px 32px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-valori .label { color: rgba(255,253,244,0.4); text-align: center; margin-bottom: 64px; }
+
+    .valori-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,253,244,0.08);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 900px) {
+      .valori-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .valore-item {
+      padding: 52px 36px;
+      background: var(--verde);
+    }
+
+    .valore-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--panna);
+      margin-bottom: 14px;
+    }
+
+    .valore-item p {
+      font-size: 0.83rem;
+      line-height: 1.75;
+      color: rgba(255,253,244,0.5);
+    }
+
+    /* ===== COLLEZIONE ===== */
+    .section-collezione {
+      background: var(--panna);
+      padding: 130px 32px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--nero);
+      margin: 16px 0 12px;
+    }
+
+    .section-header p {
+      color: var(--marrone);
+      font-size: 0.92rem;
+    }
+
+    /* Griglia prodotti */
+    .prodotti-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px 28px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 560px)  { .prodotti-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .prodotti-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Card prodotto */
+    .prodotto-card { cursor: pointer; }
+
+    .prodotto-img-wrapper {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #ede9e0;
+      margin-bottom: 18px;
+    }
+
+    .prodotto-img-wrapper img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.65s ease;
+      display: block;
+    }
+
+    .prodotto-card:hover .prodotto-img-wrapper img { transform: scale(1.05); }
+
+    /* Overlay hover — desktop */
+    .prodotto-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(4,33,14,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.35s, background 0.35s;
+    }
+
+    @media (hover: hover) {
+      .prodotto-card:hover .prodotto-overlay {
+        opacity: 1;
+        background: rgba(4,33,14,0.42);
+      }
+    }
+
+    .btn-richiedi {
+      background: var(--panna);
+      color: var(--verde);
+      border: none;
+      padding: 12px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn-richiedi:hover { background: var(--verde); color: var(--panna); }
+
+    /* Mobile: bottone sempre visibile sotto la card */
+    .btn-mobile {
+      display: none;
+      margin-top: 12px;
+      background: transparent;
+      color: var(--verde);
+      border: 1px solid var(--verde);
+      padding: 10px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    @media (hover: none) {
+      .prodotto-overlay { display: none; }
+      .btn-mobile { display: block; }
+    }
+
+    .prodotto-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--nero);
+    }
+
+    .prodotto-tipo {
+      font-size: 0.75rem;
+      color: var(--marrone);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ===== COMMUNITY ===== */
+    .section-community {
+      background: var(--verde);
+      padding: 150px 32px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-community .label { color: rgba(255,253,244,0.35); margin-bottom: 44px; }
+
+    .section-community h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--panna);
+      line-height: 1.35;
+      max-width: 780px;
+      margin: 0 auto 36px;
+    }
+
+    .section-community p {
+      color: rgba(255,253,244,0.55);
+      font-size: 1rem;
+      line-height: 1.85;
+      max-width: 520px;
+      margin: 0 auto 56px;
+    }
+
+    .btn-outline-light {
+      display: inline-block;
+      border: 1px solid rgba(255,253,244,0.55);
+      color: var(--panna);
+      padding: 14px 38px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: transparent;
+      transition: all 0.3s;
+    }
+
+    .btn-outline-light:hover {
+      background: var(--panna);
+      color: var(--verde);
+      border-color: var(--panna);
+    }
+
+    /* ===== MODAL FORM ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,33,14,0.65);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--panna);
+      width: 100%;
+      max-width: 520px;
+      padding: 52px 44px;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.35s;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal { transform: translateY(0); }
+
+    @media (max-width: 560px) { .modal { padding: 36px 24px; } }
+
+    .modal-close {
+      position: absolute;
+      top: 18px; right: 22px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--marrone);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--nero);
+      margin-bottom: 6px;
+    }
+
+    .modal-subtitle {
+      color: var(--marrone);
+      font-size: 0.88rem;
+      margin-bottom: 40px;
+    }
+
+    .form-group { margin-bottom: 28px; }
+
+    .form-group label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--marrone);
+      margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(93,84,73,0.25);
+      padding: 10px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--nero);
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-bottom-color: var(--verde); }
+
+    .form-group textarea { resize: none; height: 76px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--verde);
+      color: var(--panna);
+      border: none;
+      padding: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 36px;
+      transition: opacity 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.82; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111;
+      padding: 70px 32px 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .footer-logo img {
+      height: 44px;
+      width: 44px;
+      object-fit: cover;
+      border-radius: 8px;
+      opacity: 0.85;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: rgba(255,253,244,0.35);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--panna); }
+
+    .footer-divider { width: 100%; height: 1px; background: rgba(255,253,244,0.08); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      color: rgba(255,253,244,0.2);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== FADE ON SCROLL ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* stagger */
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav id="mainNav">
+    <div class="nav-logo">
+      <img src="./public/logo.jpg" alt="WIDER">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#brand">Il brand</a></li>
+      <li><a href="#collezione">Collezione</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <button class="nav-cta" onclick="openModal()">Richiedi info</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== HERO SCROLL EXPANSION ===== -->
+  <div class="hero-scroll-wrapper" id="heroWrapper">
+    <section class="hero-sticky">
+      <div class="hero-bg" id="heroBg"></div>
+
+      <div class="media-container" id="mediaContainer">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="./public/video hero.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay" id="videoOverlay"></div>
+      </div>
+
+      <div class="hero-text">
+        <span class="hero-word" id="heroLeft">WIDER</span>
+        <span class="hero-word" id="heroRight">è uno spazio aperto.</span>
+      </div>
+
+      <div class="scroll-indicator" id="scrollIndicator">
+        <span>scorri per esplorare</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== BRAND / MANIFESTO ===== -->
+  <section class="section-brand" id="brand">
+    <span class="label fade-up">Il Manifesto</span>
+    <div class="divider fade-up"></div>
+    <h2 class="manifesto fade-up">
+      Non è solo qualcosa da indossare.<br>
+      È qualcosa da <em>vivere</em>.
+    </h2>
+    <div class="divider fade-up"></div>
+    <p class="fade-up">
+      WIDER nasce come un universo culturale e visivo. Un brand che costruisce un immaginario riconoscibile fatto di estetica, esperienze e comunità. Prima ancora che un prodotto, WIDER è uno status e un senso di appartenenza.
+    </p>
+  </section>
+
+  <!-- ===== VALORI ===== -->
+  <section class="section-valori">
+    <span class="label fade-up">I valori</span>
+    <div class="valori-grid">
+      <div class="valore-item fade-up">
+        <h3>Apertura</h3>
+        <p>Guardare il mondo con una prospettiva più ampia. Oltre le abitudini, oltre i confini.</p>
+      </div>
+      <div class="valore-item fade-up">
+        <h3>Appartenenza</h3>
+        <p>Costruire una comunità reale attorno al brand. Un senso di riconoscimento condiviso.</p>
+      </div>
+      <div class="valore-item fade-up">
+        <h3>Autenticità</h3>
+        <p>Esperienze reali e connessioni genuine. Nessuna comunicazione artificiosa o aggressiva.</p>
+      </div>
+      <div class="valore-item fade-up">
+        <h3>Estetica</h3>
+        <p>Cura dei dettagli visivi e dell'immaginario. Ogni elemento racconta qualcosa di più.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COLLEZIONE ===== -->
+  <section class="section-collezione" id="collezione">
+    <div class="section-header">
+      <span class="label fade-up">La Collezione</span>
+      <h2 class="fade-up">I pezzi WIDER</h2>
+      <p class="fade-up">Scopri i nostri capi. Scrivi una richiesta per ricevere informazioni.</p>
+    </div>
+
+    <div class="prodotti-grid">
+
+      <div class="prodotto-card fade-up">
+        <div class="prodotto-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80" alt="Cappotto Verde">
+          <div class="prodotto-overlay">
+            <button class="btn-richiedi" onclick="openModal('Cappotto Verde')">Richiedi info</button>
+          </div>
+        </div>
+        <div class="prodotto-nome">Cappotto Verde</div>
+        <div class="prodotto-tipo">Outerwear</div>
+        <button class="btn-mobile" onclick="openModal('Cappotto Verde')">Richiedi info</button>
+      </div>
+
+      <div class="prodotto-card fade-up">
+        <div class="prodotto-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" alt="Camicia Panna">
+          <div class="prodotto-overlay">
+            <button class="btn-richiedi" onclick="openModal('Camicia Panna')">Richiedi info</button>
+          </div>
+        </div>
+        <div class="prodotto-nome">Camicia Panna</div>
+        <div class="prodotto-tipo">Camicia</div>
+        <button class="btn-mobile" onclick="openModal('Camicia Panna')">Richiedi info</button>
+      </div>
+
+      <div class="prodotto-card fade-up">
+        <div class="prodotto-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80" alt="Maglione Beige">
+          <div class="prodotto-overlay">
+            <button class="btn-richiedi" onclick="openModal('Maglione Beige')">Richiedi info</button>
+          </div>
+        </div>
+        <div class="prodotto-nome">Maglione Beige</div>
+        <div class="prodotto-tipo">Knitwear</div>
+        <button class="btn-mobile" onclick="openModal('Maglione Beige')">Richiedi info</button>
+      </div>
+
+      <div class="prodotto-card fade-up">
+        <div class="prodotto-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80" alt="Giacca Marrone">
+          <div class="prodotto-overlay">
+            <button class="btn-richiedi" onclick="openModal('Giacca Marrone')">Richiedi info</button>
+          </div>
+        </div>
+        <div class="prodotto-nome">Giacca Marrone</div>
+        <div class="prodotto-tipo">Outerwear</div>
+        <button class="btn-mobile" onclick="openModal('Giacca Marrone')">Richiedi info</button>
+      </div>
+
+      <div class="prodotto-card fade-up">
+        <div class="prodotto-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&q=80" alt="Pantaloni Wide">
+          <div class="prodotto-overlay">
+            <button class="btn-richiedi" onclick="openModal('Pantaloni Wide')">Richiedi info</button>
+          </div>
+        </div>
+        <div class="prodotto-nome">Pantaloni Wide</div>
+        <div class="prodotto-tipo">Pantaloni</div>
+        <button class="btn-mobile" onclick="openModal('Pantaloni Wide')">Richiedi info</button>
+      </div>
+
+      <div class="prodotto-card fade-up">
+        <div class="prodotto-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80" alt="T-shirt Essenziale">
+          <div class="prodotto-overlay">
+            <button class="btn-richiedi" onclick="openModal('T-shirt Essenziale')">Richiedi info</button>
+          </div>
+        </div>
+        <div class="prodotto-nome">T-shirt Essenziale</div>
+        <div class="prodotto-tipo">T-shirt</div>
+        <button class="btn-mobile" onclick="openModal('T-shirt Essenziale')">Richiedi info</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== COMMUNITY ===== -->
+  <section class="section-community" id="community">
+    <span class="label fade-up">Community</span>
+    <h2 class="fade-up">
+      Uno status prima di una collezione.<br>
+      Una comunità prima di un prodotto.
+    </h2>
+    <p class="fade-up">
+      WIDER costruisce uno spazio culturale contemporaneo dove comunità, territorio e creatività si incontrano. Attraverso eventi, contenuti e collaborazioni.
+    </p>
+    <button class="btn-outline-light fade-up" onclick="openModal()">Entra nella community</button>
+  </section>
+
+  <!-- ===== MODAL FORM ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" onclick="closeModal()">&#215;</button>
+      <h3>Richiedi informazioni</h3>
+      <p class="modal-subtitle">Compila il form e ti risponderemo via email.</p>
+
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Il tuo nome" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="La tua email" required>
+        </div>
+        <div class="form-group">
+          <label>Prodotto di interesse</label>
+          <select id="prodottoSelect">
+            <option value="">— Seleziona un capo —</option>
+            <option>Cappotto Verde</option>
+            <option>Camicia Panna</option>
+            <option>Maglione Beige</option>
+            <option>Giacca Marrone</option>
+            <option>Pantaloni Wide</option>
+            <option>T-shirt Essenziale</option>
+            <option>Altro / Non so ancora</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Messaggio</label>
+          <textarea placeholder="Dicci qualcosa in più..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="./public/logo.jpg" alt="WIDER">
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#brand">Il brand</a></li>
+        <li><a href="#collezione">Collezione</a></li>
+        <li><a href="#community">Community</a></li>
+      </ul>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p>© 2025 WIDER. Tutti i diritti riservati.</p>
+        <p>Un universo da vivere prima ancora che da indossare.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+    // ===== HERO SCROLL EXPANSION =====
+    const heroWrapper   = document.getElementById('heroWrapper');
+    const mediaContainer = document.getElementById('mediaContainer');
+    const heroBg        = document.getElementById('heroBg');
+    const heroLeft      = document.getElementById('heroLeft');
+    const heroRight     = document.getElementById('heroRight');
+    const scrollInd     = document.getElementById('scrollIndicator');
+    const videoOverlay  = document.getElementById('videoOverlay');
+
+    function updateHero() {
+      const rect = heroWrapper.getBoundingClientRect();
+      const scrollable = heroWrapper.offsetHeight - window.innerHeight;
+      const scrolled   = -rect.top;
+      const p = Math.max(0, Math.min(scrolled / scrollable, 1)); // progress 0→1
+
+      const mob  = window.innerWidth < 768;
+      const startW = mob ? 240 : 300;
+      const startH = mob ? 340 : 420;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      const w = startW + p * (vw - startW);
+      const h = startH + p * (vh - startH);
+
+      mediaContainer.style.width        = Math.min(w, vw) + 'px';
+      mediaContainer.style.height       = Math.min(h, vh) + 'px';
+      mediaContainer.style.borderRadius = (20 * (1 - p)) + 'px';
+
+      heroBg.style.opacity = (1 - p);
+
+      const tx = p * (mob ? 38 : 30);
+      heroLeft.style.transform  = `translateX(-${tx}vw)`;
+      heroRight.style.transform = `translateX(${tx}vw)`;
+      heroLeft.style.opacity    = Math.max(0, 1 - p * 2.4);
+      heroRight.style.opacity   = Math.max(0, 1 - p * 2.4);
+
+      scrollInd.style.opacity = Math.max(0, 1 - p * 5);
+
+      const ov = 0.32 - p * 0.22;
+      videoOverlay.style.background = `rgba(4,33,14,${Math.max(0.08, ov)})`;
+    }
+
+    window.addEventListener('scroll', updateHero, { passive: true });
+    window.addEventListener('resize', updateHero, { passive: true });
+    updateHero();
+
+
+    // ===== NAV SCROLL STATE =====
+    const mainNav = document.getElementById('mainNav');
+
+    window.addEventListener('scroll', () => {
+      const threshold = heroWrapper.offsetHeight - 120;
+      if (window.scrollY > threshold) {
+        mainNav.classList.add('scrolled');
+      } else {
+        mainNav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+
+    // ===== FADE ON SCROLL =====
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => io.observe(el));
+
+
+    // ===== MODAL =====
+    function openModal(prodotto) {
+      const overlay = document.getElementById('modalOverlay');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (prodotto) {
+        const sel = document.getElementById('prodottoSelect');
+        for (let i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].text === prodotto) { sel.selectedIndex = i; break; }
+        }
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      // Placeholder — integrazione email da fare in Next.js
+      alert('Richiesta inviata! Ti risponderemo presto.');
+      closeModal();
+    }
+
+  </script>
+</body>
+</html>
