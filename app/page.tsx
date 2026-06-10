@@ -423,8 +423,8 @@ export default function Home() {
             text="Un universo da vivere"
             className="fade-up shiny-title-wrap"
             textClassName="shiny-title"
-            gradientColors="linear-gradient(90deg, #FFFDF4, #C2E5FF, #FFFDF4)"
-            gradientAnimationDuration={3}
+            gradientColors="linear-gradient(110deg, #5FA8C4 0%, #5FA8C4 35%, #FFFFFF 50%, #5FA8C4 65%, #5FA8C4 100%)"
+            gradientAnimationDuration={2.5}
           />
         </div>
         <div className="gallery-stack fade-up">
