@@ -5,6 +5,17 @@ import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 import { NavHeader } from "@/components/ui/nav-header";
 import { TextEffect } from "@/components/ui/text-effect";
 import { GlobePulse } from "@/components/ui/cobe-globe-pulse";
+import { WorldMap } from "@/components/ui/map";
+
+const MILANO = { lat: 45.4642, lng: 9.19, label: "Milano" };
+const communityDots = [
+  { start: MILANO, end: { lat: 48.8566, lng: 2.3522, label: "Parigi" } },
+  { start: MILANO, end: { lat: 51.5074, lng: -0.1278, label: "Londra" } },
+  { start: MILANO, end: { lat: 40.7128, lng: -74.006, label: "New York" } },
+  { start: MILANO, end: { lat: 35.6762, lng: 139.6503, label: "Tokyo" } },
+  { start: MILANO, end: { lat: 52.52, lng: 13.405, label: "Berlino" } },
+  { start: MILANO, end: { lat: 25.2048, lng: 55.2708, label: "Dubai" } },
+];
 
 const navItems = [
   { label: "Il brand",   href: "#brand" },
@@ -448,6 +459,9 @@ export default function Home() {
           WIDER è un punto di incontro contemporaneo tra community, territorio e creatività.<br />
           Prende vita attraverso eventi, contenuti e collaborazioni.
         </p>
+        <div className="community-map fade-up">
+          <WorldMap dots={communityDots} lineColor="#C2E5FF" dotColor="#FFFDF44D" showLabels={false} />
+        </div>
         <a
           className="btn-outline-light fade-up"
           href="https://www.instagram.com/weare.wider"

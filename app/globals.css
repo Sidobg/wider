@@ -654,6 +654,15 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 
 .btn-outline-light:hover { background: var(--panna); color: var(--verde); border-color: var(--panna); }
 
+.community-map {
+  max-width: 1000px;
+  margin: 8px auto 52px;
+}
+
+@media (max-width: 768px) {
+  .community-map { margin: 4px auto 36px; }
+}
+
 /* ===== MODAL ===== */
 .modal-overlay {
   position: fixed;
