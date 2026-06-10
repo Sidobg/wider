@@ -303,6 +303,28 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   text-align: center;
   position: relative;
   z-index: 20;
+  overflow: hidden;
+}
+
+/* Globo decorativo dietro il testo */
+.manifesto-globe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(340px, 62vw, 640px);
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Testo sempre sopra al globo */
+.section-brand > .label,
+.section-brand > .divider,
+.section-brand > .manifesto,
+.section-brand > p {
+  position: relative;
+  z-index: 1;
 }
 
 .label {
