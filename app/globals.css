@@ -291,7 +291,7 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 
 .hero-separator {
   background: var(--panna);
-  height: 80px;
+  height: 40px;
   position: relative;
   z-index: 20;
 }
