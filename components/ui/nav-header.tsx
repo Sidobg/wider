@@ -59,9 +59,10 @@ function Tab({
         fontWeight: 400,
         letterSpacing: "0.12em",
         textTransform: "uppercase",
-        mixBlendMode: "difference",
-        color: scrolled ? "var(--verde)" : "var(--panna)",
+        mixBlendMode: scrolled ? "normal" : "difference",
+        color: scrolled ? "var(--marrone)" : "var(--panna)",
         whiteSpace: "nowrap",
+        transition: "color 0.3s",
       }}
     >
       <a href={href} style={{ textDecoration: "none", color: "inherit" }}>{children}</a>
@@ -78,7 +79,7 @@ function Cursor({ position, scrolled }: { position: Position; scrolled: boolean 
         zIndex: 0,
         height: "32px",
         borderRadius: "9999px",
-        background: scrolled ? "var(--verde)" : "var(--panna)",
+        background: scrolled ? "rgba(93,84,73,0.12)" : "var(--panna)",
       }}
     />
   );
