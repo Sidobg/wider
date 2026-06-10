@@ -5,6 +5,9 @@ import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 import { NavHeader } from "@/components/ui/nav-header";
 import { TextEffect } from "@/components/ui/text-effect";
 import { GlobePulse } from "@/components/ui/cobe-globe-pulse";
+import { PoemAnimation } from "@/components/ui/3d-animation";
+
+const communityPoem = `<p>La <span>community</span> WIDER nasce dalle persone che vivono il mondo con la stessa <span>visione</span>. Non un prodotto, ma un <span>senso di appartenenza</span>. Nelle <span>connessioni</span> che nascono, nelle <span>esperienze</span> condivise, nel modo di guardare oltre. Un punto di incontro tra <span>community</span>, territorio e <span>creatività</span>. <span>Not for narrow minds.</span> &nbsp; </p>`;
 
 const navItems = [
   { label: "Il brand",   href: "#brand" },
@@ -436,6 +439,9 @@ export default function Home() {
 
       {/* ===== COMMUNITY ===== */}
       <section className="section-community" id="community">
+        <div className="community-fx" aria-hidden="true">
+          <PoemAnimation poemHTML={communityPoem} />
+        </div>
         <span className="label fade-up">Community</span>
         <h2 className="fade-up">
           Uno status prima di una collezione.<br />
