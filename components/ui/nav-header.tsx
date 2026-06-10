@@ -49,10 +49,22 @@ function Tab({
         const { width } = ref.current.getBoundingClientRect();
         setPosition({ width, opacity: 1, left: ref.current.offsetLeft });
       }}
-      className="relative z-10 block cursor-pointer px-4 py-1.5 text-xs uppercase tracking-widest mix-blend-difference"
-      style={{ color: scrolled ? "var(--verde)" : "var(--panna)" }}
+      style={{
+        position: "relative",
+        zIndex: 10,
+        display: "block",
+        cursor: "pointer",
+        padding: "7px 18px",
+        fontSize: "11px",
+        fontWeight: 400,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        mixBlendMode: "difference",
+        color: scrolled ? "var(--verde)" : "var(--panna)",
+        whiteSpace: "nowrap",
+      }}
     >
-      <a href={href}>{children}</a>
+      <a href={href} style={{ textDecoration: "none", color: "inherit" }}>{children}</a>
     </li>
   );
 }
@@ -61,8 +73,13 @@ function Cursor({ position, scrolled }: { position: Position; scrolled: boolean 
   return (
     <motion.li
       animate={position}
-      className="absolute z-0 h-7 rounded-full"
-      style={{ background: scrolled ? "var(--verde)" : "var(--panna)" }}
+      style={{
+        position: "absolute",
+        zIndex: 0,
+        height: "32px",
+        borderRadius: "9999px",
+        background: scrolled ? "var(--verde)" : "var(--panna)",
+      }}
     />
   );
 }
