@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 import { NavHeader } from "@/components/ui/nav-header";
+import { TextEffect } from "@/components/ui/text-effect";
 
 const navItems = [
   { label: "Il brand",   href: "#brand" },
@@ -59,6 +60,9 @@ export default function Home() {
   const [modalOpen,      setModalOpen]      = useState(false);
   const [modalProduct,   setModalProduct]   = useState("");
   const [cardSize,       setCardSize]       = useState({ w: 480, h: 320 });
+  const [manifestoInView, setManifestoInView] = useState(false);
+
+  const manifestoRef = useRef<HTMLHeadingElement>(null);
 
   const heroWrapperRef    = useRef<HTMLDivElement>(null);
   const mediaContainerRef = useRef<HTMLDivElement>(null);
@@ -135,6 +139,18 @@ export default function Home() {
     };
     window.addEventListener("scroll", handle, { passive: true });
     return () => window.removeEventListener("scroll", handle);
+  }, []);
+
+  // Manifesto text effect trigger on view
+  useEffect(() => {
+    const el = manifestoRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setManifestoInView(true); io.disconnect(); } },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   // Fade on scroll
@@ -315,9 +331,18 @@ export default function Home() {
       <section className="section-brand" id="brand">
         <span className="label fade-up">Il Manifesto</span>
         <div className="divider fade-up" />
-        <h2 className="manifesto fade-up">
-          Non è solo qualcosa da indossare.<br />
-          È qualcosa da <em>vivere</em>.
+        <h2 className="manifesto" ref={manifestoRef}>
+          <TextEffect as="span" per="word" preset="blur" trigger={manifestoInView} className="manifesto-line">
+            Non è solo qualcosa da indossare.
+          </TextEffect>
+          <span className="manifesto-line">
+            <TextEffect as="span" per="word" preset="blur" trigger={manifestoInView} delay={0.5} className="manifesto-inline">
+              {"È qualcosa da "}
+            </TextEffect>
+            <TextEffect as="span" per="word" preset="blur" trigger={manifestoInView} delay={0.9} className="manifesto-inline manifesto-em">
+              vivere.
+            </TextEffect>
+          </span>
         </h2>
         <div className="divider fade-up" />
         <p className="fade-up">
