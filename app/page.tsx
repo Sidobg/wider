@@ -79,7 +79,6 @@ export default function Home() {
   const heroWrapperRef    = useRef<HTMLDivElement>(null);
   const mediaContainerRef = useRef<HTMLDivElement>(null);
   const heroBgRef         = useRef<HTMLDivElement>(null);
-  const heroLeftRef       = useRef<HTMLImageElement>(null);
   const heroRightRef      = useRef<HTMLSpanElement>(null);
   const scrollIndRef      = useRef<HTMLDivElement>(null);
   const videoOverlayRef   = useRef<HTMLDivElement>(null);
@@ -103,11 +102,10 @@ export default function Home() {
       const wrapper = heroWrapperRef.current;
       const mc  = mediaContainerRef.current;
       const bg  = heroBgRef.current;
-      const lft = heroLeftRef.current;
       const rgt = heroRightRef.current;
       const ind = scrollIndRef.current;
       const ov  = videoOverlayRef.current;
-      if (!wrapper || !mc || !bg || !lft || !rgt || !ind || !ov) return;
+      if (!wrapper || !mc || !bg || !rgt || !ind || !ov) return;
 
       const rect       = wrapper.getBoundingClientRect();
       const scrollable = wrapper.offsetHeight - window.innerHeight;
@@ -124,10 +122,7 @@ export default function Home() {
       mc.style.borderRadius = 20 * (1 - p) + "px";
       bg.style.opacity      = String(1 - p);
 
-      const tx = mob ? 0 : p * 30;
-      lft.style.transform = `translateX(-${tx}vw)`;
-      rgt.style.transform = `translateX(${tx}vw)`;
-      lft.style.opacity   = String(Math.max(0, 1 - p * 2.4));
+      rgt.style.transform = `scale(${1 + p * 0.12})`;
       rgt.style.opacity   = String(Math.max(0, 1 - p * 2.4));
       ind.style.opacity   = String(Math.max(0, 1 - p * 5));
 
@@ -319,13 +314,6 @@ export default function Home() {
             <div className="video-overlay" ref={videoOverlayRef} />
           </div>
           <div className="hero-text">
-            <img
-              id="heroLeft"
-              ref={heroLeftRef}
-              src="/wider-scritta.png"
-              alt="Wider"
-              style={{ marginLeft: "5vw", objectFit: "contain", filter: "brightness(0) invert(1)" }}
-            />
             <span className="hero-word" id="heroRight" ref={heroRightRef}>
               Rotate your perspective.
             </span>

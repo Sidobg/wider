@@ -226,19 +226,20 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 12vw 0 4vw;
+  justify-content: center;
+  padding: 0 5vw;
   pointer-events: none;
   mix-blend-mode: difference;
 }
 
 .hero-word {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 5.5vw, 4.8rem);
-  font-weight: 700;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: clamp(1.9rem, 5vw, 4.2rem);
+  font-weight: 500;
   color: var(--panna);
   white-space: nowrap;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
