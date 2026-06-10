@@ -333,6 +333,7 @@ export default function Home() {
         <div className="manifesto-globe" aria-hidden="true">
           <GlobePulse speed={0.0025} pulseColor="#7EC8DC" />
         </div>
+        <div className="manifesto-scrim" aria-hidden="true" />
         <span className="label fade-up">Il Manifesto</span>
         <div className="divider fade-up" />
         <h2 className="manifesto" ref={manifestoRef}>

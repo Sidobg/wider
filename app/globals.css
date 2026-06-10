@@ -314,8 +314,27 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   transform: translate(-50%, -50%);
   width: clamp(340px, 62vw, 640px);
   z-index: 0;
-  opacity: 0.4;
+  opacity: 0.32;
   pointer-events: none;
+}
+
+/* Velatura panna per leggibilità (sopra il globo, sotto il testo) */
+.manifesto-scrim {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 94%);
+  height: 82%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    var(--panna) 0%,
+    rgba(255, 253, 244, 0.9) 40%,
+    rgba(255, 253, 244, 0.55) 62%,
+    rgba(255, 253, 244, 0) 82%
+  );
 }
 
 /* Testo sempre sopra al globo */
