@@ -2,6 +2,14 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
+import { NavHeader } from "@/components/ui/nav-header";
+
+const navItems = [
+  { label: "Il brand",   href: "#brand" },
+  { label: "Collezione", href: "#collezione" },
+  { label: "Gallery",    href: "#gallery" },
+  { label: "Community",  href: "#community" },
+];
 
 const galleryItems: CardStackItem[] = [
   {
@@ -262,11 +270,7 @@ export default function Home() {
         <div className="nav-logo">
           <img src="/logo.jpg" alt="WIDER" />
         </div>
-        <ul className="nav-links">
-          <li><a href="#brand">Il brand</a></li>
-          <li><a href="#collezione">Collezione</a></li>
-          <li><a href="#community">Community</a></li>
-        </ul>
+        <NavHeader items={navItems} scrolled={navScrolled} />
         <button className="nav-cta" onClick={() => openModal()}>Richiedi info</button>
         <button className="hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
           <span /><span />
@@ -462,6 +466,7 @@ export default function Home() {
         <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>&#215;</button>
         <a href="#brand"      onClick={() => setMobileMenuOpen(false)}>Il brand</a>
         <a href="#collezione" onClick={() => setMobileMenuOpen(false)}>Collezione</a>
+        <a href="#gallery"    onClick={() => setMobileMenuOpen(false)}>Gallery</a>
         <a href="#community"  onClick={() => setMobileMenuOpen(false)}>Community</a>
         <button className="mobile-menu-cta-btn" onClick={() => { setMobileMenuOpen(false); openModal(); }}>
           Richiedi info
