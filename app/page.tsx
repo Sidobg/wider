@@ -7,6 +7,7 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { GlobePulse } from "@/components/ui/cobe-globe-pulse";
 import { WorldMap } from "@/components/ui/map";
 import { AnimatedText } from "@/components/ui/animated-shiny-text";
+import VaporizeTextCycle, { Tag } from "@/components/ui/vapour-text-effect";
 
 const MILANO = { lat: 45.4642, lng: 9.19, label: "Milano" };
 const communityDots = [
@@ -74,13 +75,14 @@ export default function Home() {
   const [modalProduct,   setModalProduct]   = useState("");
   const [cardSize,       setCardSize]       = useState({ w: 480, h: 320 });
   const [manifestoInView, setManifestoInView] = useState(false);
+  const [vaporFont,      setVaporFont]      = useState("60px");
 
   const manifestoRef = useRef<HTMLHeadingElement>(null);
 
   const heroWrapperRef    = useRef<HTMLDivElement>(null);
   const mediaContainerRef = useRef<HTMLDivElement>(null);
   const heroBgRef         = useRef<HTMLDivElement>(null);
-  const heroRightRef      = useRef<HTMLSpanElement>(null);
+  const heroRightRef      = useRef<HTMLDivElement>(null);
   const scrollIndRef      = useRef<HTMLDivElement>(null);
   const videoOverlayRef   = useRef<HTMLDivElement>(null);
   const valoriSectionRef  = useRef<HTMLElement>(null);
@@ -91,6 +93,8 @@ export default function Home() {
     const update = () => {
       const mob = window.innerWidth < 768;
       setCardSize({ w: mob ? 290 : 480, h: mob ? 195 : 320 });
+      const size = Math.round(Math.min(64, Math.max(22, window.innerWidth / 13)));
+      setVaporFont(size + "px");
     };
     update();
     window.addEventListener("resize", update, { passive: true });
@@ -315,9 +319,19 @@ export default function Home() {
             <div className="video-overlay" ref={videoOverlayRef} />
           </div>
           <div className="hero-text">
-            <span className="hero-word" id="heroRight" ref={heroRightRef}>
-              Rotate your perspective.
-            </span>
+            <div className="hero-vapor" ref={heroRightRef}>
+              <VaporizeTextCycle
+                texts={["Rotate your perspective."]}
+                font={{ fontFamily: "Space Grotesk, sans-serif", fontSize: vaporFont, fontWeight: 500 }}
+                color="rgb(255,253,244)"
+                spread={4}
+                density={6}
+                animation={{ vaporizeDuration: 2.2, fadeInDuration: 1.2, waitDuration: 1.6 }}
+                direction="left-to-right"
+                alignment="center"
+                tag={Tag.H1}
+              />
+            </div>
           </div>
           <div className="scroll-indicator" ref={scrollIndRef}>
             <span>scorri per esplorare</span>

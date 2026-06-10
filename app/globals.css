@@ -229,7 +229,16 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   justify-content: center;
   padding: 0 5vw;
   pointer-events: none;
-  mix-blend-mode: difference;
+}
+
+.hero-vapor {
+  width: min(900px, 92vw);
+  height: 150px;
+  filter: drop-shadow(0 2px 18px rgba(4, 33, 14, 0.55));
+}
+
+@media (max-width: 768px) {
+  .hero-vapor { height: 100px; }
 }
 
 .hero-word {
