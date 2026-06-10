@@ -98,8 +98,8 @@ export default function Home() {
       const p = Math.max(0, Math.min(-rect.top / scrollable, 1));
 
       const mob    = window.innerWidth < 768;
-      const startW = mob ? 240 : 300;
-      const startH = mob ? 340 : 420;
+      const startW = mob ? 340 : 300;
+      const startH = mob ? 560 : 420;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
 
