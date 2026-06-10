@@ -270,7 +270,9 @@ export default function Home() {
         <div className="nav-logo">
           <img src="/logo.jpg" alt="WIDER" />
         </div>
-        <NavHeader items={navItems} scrolled={navScrolled} />
+        <div className="nav-pill-wrapper">
+          <NavHeader items={navItems} scrolled={navScrolled} />
+        </div>
         <button className="nav-cta" onClick={() => openModal()}>Richiedi info</button>
         <button className="hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
           <span /><span />
