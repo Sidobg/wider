@@ -312,9 +312,9 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(340px, 62vw, 640px);
+  width: clamp(420px, 80vw, 840px);
   z-index: 0;
-  opacity: 0.32;
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -324,16 +324,15 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(900px, 94%);
-  height: 82%;
+  width: min(560px, 76%);
+  height: 52%;
   z-index: 0;
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
-    var(--panna) 0%,
-    rgba(255, 253, 244, 0.9) 40%,
-    rgba(255, 253, 244, 0.55) 62%,
-    rgba(255, 253, 244, 0) 82%
+    rgba(255, 253, 244, 0.82) 0%,
+    rgba(255, 253, 244, 0.5) 45%,
+    rgba(255, 253, 244, 0) 72%
   );
 }
 
@@ -348,11 +347,11 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 
 /* Alone panna per leggibilità sopra il globo */
 .section-brand > .manifesto {
-  text-shadow: 0 0 16px var(--panna), 0 0 28px var(--panna);
+  text-shadow: 0 0 8px var(--panna), 0 0 16px var(--panna), 0 0 28px var(--panna), 0 0 40px var(--panna);
 }
 
 .section-brand > p {
-  text-shadow: 0 1px 2px var(--panna), 0 0 12px var(--panna), 0 0 20px var(--panna);
+  text-shadow: 0 1px 2px var(--panna), 0 0 8px var(--panna), 0 0 16px var(--panna), 0 0 26px var(--panna);
 }
 
 .label {
