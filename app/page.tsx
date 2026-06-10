@@ -279,6 +279,7 @@ export default function Home() {
           <div className="hero-bg" ref={heroBgRef} />
           <div className="media-container" ref={mediaContainerRef}>
             <video autoPlay muted loop playsInline preload="auto">
+              <source src="/video-hero.webm" type="video/webm" />
               <source src="/video hero.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay" ref={videoOverlayRef} />
