@@ -327,7 +327,7 @@ export default function Home() {
               style={{ marginLeft: "5vw", objectFit: "contain", filter: "brightness(0) invert(1)" }}
             />
             <span className="hero-word" id="heroRight" ref={heroRightRef}>
-              è uno spazio aperto.
+              Rotate your perspective.
             </span>
           </div>
           <div className="scroll-indicator" ref={scrollIndRef}>
