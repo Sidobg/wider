@@ -242,9 +242,20 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 }
 
 @media (max-width: 768px) {
-  .hero-text { padding: 0 5vw; }
-  #heroLeft  { margin-left: 0 !important; width: clamp(160px, 52vw, 260px) !important; }
-  #heroRight { font-size: clamp(1.2rem, 5vw, 1.6rem) !important; white-space: normal !important; max-width: 44vw !important; text-align: right; line-height: 1.25; margin-right: 4vw; }
+  .hero-text {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    padding: 0;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    mix-blend-mode: normal;
+    text-shadow: 0 2px 24px rgba(4,33,14,0.55);
+  }
+  #heroLeft  { margin-left: 0 !important; width: clamp(180px, 56vw, 280px) !important; filter: brightness(0) invert(1) drop-shadow(0 2px 18px rgba(4,33,14,0.5)) !important; }
+  #heroRight { font-size: clamp(1.4rem, 6vw, 2rem) !important; white-space: normal !important; max-width: 80vw !important; text-align: center; line-height: 1.25; margin-right: 0; }
 }
 
 .scroll-indicator {
@@ -767,7 +778,6 @@ footer {
 
 /* ===== MOBILE SPACING ===== */
 @media (max-width: 768px) {
-  .hero-text { display: none; }
   .hero-separator { height: 48px; }
 
   .section-brand { padding: 44px 20px 52px; }

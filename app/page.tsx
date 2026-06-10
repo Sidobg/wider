@@ -108,7 +108,7 @@ export default function Home() {
       mc.style.borderRadius = 20 * (1 - p) + "px";
       bg.style.opacity      = String(1 - p);
 
-      const tx = p * (mob ? 38 : 30);
+      const tx = mob ? 0 : p * 30;
       lft.style.transform = `translateX(-${tx}vw)`;
       rgt.style.transform = `translateX(${tx}vw)`;
       lft.style.opacity   = String(Math.max(0, 1 - p * 2.4));
