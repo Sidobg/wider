@@ -598,6 +598,16 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   font-weight: 400;
 }
 
+/* Titolo shiny (gradiente animato) */
+.shiny-title-wrap { padding: 0 !important; }
+.shiny-title {
+  font-family: 'Playfair Display', serif !important;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.01em;
+}
+
 .gallery-stack {
   max-width: 720px;
   margin: 0 auto;

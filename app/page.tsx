@@ -6,6 +6,7 @@ import { NavHeader } from "@/components/ui/nav-header";
 import { TextEffect } from "@/components/ui/text-effect";
 import { GlobePulse } from "@/components/ui/cobe-globe-pulse";
 import { WorldMap } from "@/components/ui/map";
+import { AnimatedText } from "@/components/ui/animated-shiny-text";
 
 const MILANO = { lat: 45.4642, lng: 9.19, label: "Milano" };
 const communityDots = [
@@ -418,7 +419,13 @@ export default function Home() {
       <section className="section-gallery" id="gallery">
         <div className="section-header">
           <span className="label fade-up">La Visione</span>
-          <h2 className="fade-up">Un universo da vivere</h2>
+          <AnimatedText
+            text="Un universo da vivere"
+            className="fade-up shiny-title-wrap"
+            textClassName="shiny-title"
+            gradientColors="linear-gradient(90deg, #FFFDF4, #C2E5FF, #FFFDF4)"
+            gradientAnimationDuration={3}
+          />
         </div>
         <div className="gallery-stack fade-up">
           <CardStack
