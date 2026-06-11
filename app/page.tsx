@@ -7,6 +7,7 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { WorldMap } from "@/components/ui/map";
 import { AnimatedText } from "@/components/ui/animated-shiny-text";
 import VaporizeTextCycle, { Tag } from "@/components/ui/vapour-text-effect";
+import { t, type Lang } from "@/lib/translations";
 
 const MILANO = { lat: 45.4642, lng: 9.19, label: "Milano" };
 const communityDots = [
@@ -18,56 +19,25 @@ const communityDots = [
   { start: MILANO, end: { lat: 25.2048, lng: 55.2708, label: "Dubai" } },
 ];
 
-const navItems = [
-  { label: "Il brand",   href: "#brand" },
-  { label: "Collezione", href: "#collezione" },
-  { label: "Gallery",    href: "#gallery" },
-  { label: "Community",  href: "#community" },
+const galleryImgs = [
+  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
+  "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80",
+  "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
+  "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
+  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
 ];
 
-const galleryItems: CardStackItem[] = [
-  {
-    id: 1,
-    title: "First Vision",
-    description: "Summer Collection 2025",
-    imageSrc: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
-  },
-  {
-    id: 2,
-    title: "Openness",
-    description: "Vivere le esperienze per ciò che sono",
-    imageSrc: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80",
-  },
-  {
-    id: 3,
-    title: "Belonging",
-    description: "Le persone sono il brand",
-    imageSrc: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "Authenticity",
-    description: "Momenti veri, vissuti prima di essere raccontati",
-    imageSrc: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
-  },
-  {
-    id: 5,
-    title: "Aesthetic",
-    description: "La cura del dettaglio come linguaggio",
-    imageSrc: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
-  },
-];
-
-const products = [
-  { nome: "Cappotto Verde",    tipo: "Outerwear", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80" },
-  { nome: "Camicia Panna",     tipo: "Camicia",   img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80" },
-  { nome: "Maglione Beige",    tipo: "Knitwear",  img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=80" },
-  { nome: "Giacca Marrone",    tipo: "Outerwear", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80" },
-  { nome: "Pantaloni Wide",    tipo: "Pantaloni", img: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80" },
-  { nome: "T-shirt Essenziale",tipo: "T-shirt",   img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80" },
+const productImgs = [
+  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
+  "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
+  "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=80",
+  "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
+  "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
+  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
 ];
 
 export default function Home() {
+  const [lang,           setLang]           = useState<Lang>("it");
   const [navScrolled,    setNavScrolled]    = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen,      setModalOpen]      = useState(false);
@@ -75,6 +45,25 @@ export default function Home() {
   const [cardSize,       setCardSize]       = useState({ w: 480, h: 320 });
   const [manifestoInView, setManifestoInView] = useState(false);
   const [vaporFont,      setVaporFont]      = useState("60px");
+
+  const tr = t[lang];
+  const navItems = [
+    { label: tr.nav.brand,      href: "#brand"      },
+    { label: tr.nav.collezione, href: "#collezione" },
+    { label: tr.nav.gallery,    href: "#gallery"    },
+    { label: tr.nav.community,  href: "#community"  },
+  ];
+  const galleryItems: CardStackItem[] = tr.gallery.items.map((item, i) => ({
+    id: i + 1,
+    title: item.title,
+    description: item.description,
+    imageSrc: galleryImgs[i],
+  }));
+  const products = tr.collezione.products.map((p, i) => ({
+    nome: p.nome,
+    tipo: p.tipo,
+    img: productImgs[i],
+  }));
 
   const manifestoRef = useRef<HTMLHeadingElement>(null);
 
@@ -302,7 +291,10 @@ export default function Home() {
         <div className="nav-pill-wrapper">
           <NavHeader items={navItems} scrolled={navScrolled} />
         </div>
-        <button className="nav-cta" onClick={() => openModal()}>Richiedi info</button>
+        <button className="lang-toggle" onClick={() => setLang(lang === "it" ? "en" : "it")} aria-label="Switch language">
+          {lang === "it" ? "🇬🇧" : "🇮🇹"}
+        </button>
+        <button className="nav-cta" onClick={() => openModal()}>{tr.nav.cta}</button>
         <button className="hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
           <span /><span />
         </button>
@@ -335,7 +327,7 @@ export default function Home() {
             </div>
           </div>
           <div className="scroll-indicator" ref={scrollIndRef}>
-            <span>scorri per esplorare</span>
+            <span>{tr.hero.scroll}</span>
             <div className="scroll-line" />
           </div>
         </section>
@@ -345,29 +337,28 @@ export default function Home() {
 
       {/* ===== MANIFESTO ===== */}
       <section className="section-brand" id="brand">
-        <span className="label fade-up">Il Manifesto</span>
+        <span className="label fade-up">{tr.manifesto.label}</span>
         <div className="divider fade-up" />
         <h2 className="manifesto" ref={manifestoRef}>
           <TextEffect as="span" per="word" preset="blur" trigger={manifestoInView} className="manifesto-line">
-            Non è solo qualcosa da indossare.
+            {tr.manifesto.line1}
           </TextEffect>
           <span className="manifesto-line">
             <TextEffect as="span" per="word" preset="blur" trigger={manifestoInView} delay={0.5} className="manifesto-inline">
-              {"È qualcosa da "}
+              {tr.manifesto.line2a}
             </TextEffect>
             <TextEffect as="span" per="word" preset="blur" trigger={manifestoInView} delay={0.9} className="manifesto-inline manifesto-em">
-              vivere.
+              {tr.manifesto.line2b}
             </TextEffect>
           </span>
         </h2>
         <div className="divider fade-up" />
         <p className="fade-up">
-          WIDER è un invito a cambiare prospettiva.<br />
-          A vivere le esperienze prima di raccontarle.<br /><br />
-          Un immaginario costruito attraverso persone, esperienze ed estetica
-          che condividono lo stesso modo di vedere il mondo.<br /><br />
-          Prima ancora che un prodotto, WIDER è uno status.<br />
-          Un senso di appartenenza.
+          {tr.manifesto.body[0]}<br />
+          {tr.manifesto.body[1]}<br /><br />
+          {tr.manifesto.body[2]}<br /><br />
+          {tr.manifesto.body[3]}<br />
+          {tr.manifesto.body[4]}
         </p>
       </section>
 
@@ -377,33 +368,23 @@ export default function Home() {
           ref={canvasRef}
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", filter: "blur(15px)" }}
         />
-        <span className="label fade-up">I valori</span>
+        <span className="label fade-up">{tr.valori.label}</span>
         <div className="valori-grid">
-          <div className="valore-item fade-up">
-            <h3>Openness</h3>
-            <p>Guardare il mondo con una prospettiva più ampia. Uscire dalle abitudini, vivere le esperienze per ciò che sono, vedere il mondo in orizzontale.</p>
-          </div>
-          <div className="valore-item fade-up">
-            <h3>Belonging</h3>
-            <p>Il prodotto è il simbolo. Le persone sono il brand. WIDER prende forma attraverso chi ne condivide la visione, le esperienze e il modo di vivere il mondo.</p>
-          </div>
-          <div className="valore-item fade-up">
-            <h3>Authenticity</h3>
-            <p>Esperienze reali. Connessioni genuine. Tutto ciò che conta nasce da momenti veri, vissuti prima di essere raccontati.</p>
-          </div>
-          <div className="valore-item fade-up">
-            <h3>Aesthetic</h3>
-            <p>La cura del dettaglio come linguaggio. Ogni elemento, dal prodotto all&apos;immagine, esprime l&apos;universo WIDER e i suoi valori.</p>
-          </div>
+          {tr.valori.items.map((v) => (
+            <div key={v.title} className="valore-item fade-up">
+              <h3>{v.title}</h3>
+              <p>{v.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ===== COLLEZIONE ===== */}
       <section className="section-collezione" id="collezione">
         <div className="section-header">
-          <span className="label fade-up">Not for narrow minds</span>
-          <h2 className="fade-up">First Vision — Summer Collection</h2>
-          <p className="fade-up">Scopri i nostri capi. Scrivi una richiesta per ricevere informazioni.</p>
+          <span className="label fade-up">{tr.collezione.label}</span>
+          <h2 className="fade-up">{tr.collezione.title}</h2>
+          <p className="fade-up">{tr.collezione.subtitle}</p>
         </div>
         <div className="prodotti-grid">
           {products.map((p) => (
@@ -414,7 +395,7 @@ export default function Home() {
                 <div className="dest-card-nome">{p.nome}</div>
                 <div className="dest-card-tipo">{p.tipo}</div>
                 <button className="dest-card-btn">
-                  <span>Richiedi info</span>
+                  <span>{tr.collezione.cta}</span>
                   <svg className="dest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
@@ -429,9 +410,9 @@ export default function Home() {
       {/* ===== GALLERIA ===== */}
       <section className="section-gallery" id="gallery">
         <div className="section-header">
-          <span className="label fade-up">La Visione</span>
+          <span className="label fade-up">{tr.gallery.label}</span>
           <AnimatedText
-            text="Un universo da vivere"
+            text={tr.gallery.title}
             className="fade-up shiny-title-wrap"
             textClassName="shiny-title"
             gradientColors="linear-gradient(110deg, #5FA8C4 0%, #5FA8C4 35%, #FFFFFF 50%, #5FA8C4 65%, #5FA8C4 100%)"
@@ -454,16 +435,16 @@ export default function Home() {
 
       {/* ===== COMMUNITY ===== */}
       <section className="section-community" id="community">
-        <span className="label fade-up">Community</span>
+        <span className="label fade-up">{tr.community.label}</span>
         <h2 className="fade-up">
-          Uno status prima di una collezione.<br />
-          Una comunità prima di un prodotto.
+          {tr.community.title1}<br />
+          {tr.community.title2}
         </h2>
         <p className="fade-up">
-          La forza di WIDER è nelle persone che lo vivono.<br />
-          Nelle connessioni che nascono, nella mentalità condivisa, nel modo di vivere le esperienze.<br /><br />
-          WIDER è un punto di incontro contemporaneo tra community, territorio e creatività.<br />
-          Prende vita attraverso eventi, contenuti e collaborazioni.
+          {tr.community.body[0]}<br />
+          {tr.community.body[1]}<br /><br />
+          {tr.community.body[2]}<br />
+          {tr.community.body[3]}
         </p>
         <div className="community-map fade-up">
           <WorldMap dots={communityDots} lineColor="#C2E5FF" dotColor="#FFFDF44D" showLabels={false} />
@@ -474,7 +455,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Scopri i nostri eventi
+          {tr.community.cta}
         </a>
       </section>
 
@@ -485,30 +466,30 @@ export default function Home() {
       >
         <div className="modal">
           <button className="modal-close" onClick={closeModal}>&#215;</button>
-          <h3>Richiedi informazioni</h3>
-          <p className="modal-subtitle">Compila il form e ti risponderemo via email.</p>
+          <h3>{tr.modal.title}</h3>
+          <p className="modal-subtitle">{tr.modal.subtitle}</p>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Nome</label>
-              <input type="text" placeholder="Il tuo nome" required />
+              <label>{tr.modal.name}</label>
+              <input type="text" placeholder={tr.modal.namePlaceholder} required />
             </div>
             <div className="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="La tua email" required />
+              <label>{tr.modal.email}</label>
+              <input type="email" placeholder={tr.modal.emailPlaceholder} required />
             </div>
             <div className="form-group">
-              <label>Prodotto di interesse</label>
+              <label>{tr.modal.product}</label>
               <select value={modalProduct} onChange={(e) => setModalProduct(e.target.value)}>
-                <option value="">— Seleziona un capo —</option>
+                <option value="">{tr.modal.productDefault}</option>
                 {products.map((p) => <option key={p.nome}>{p.nome}</option>)}
-                <option>Altro / Non so ancora</option>
+                <option>{tr.modal.productOther}</option>
               </select>
             </div>
             <div className="form-group">
-              <label>Messaggio</label>
-              <textarea placeholder="Dicci qualcosa in più..." />
+              <label>{tr.modal.message}</label>
+              <textarea placeholder={tr.modal.messagePlaceholder} />
             </div>
-            <button type="submit" className="form-submit">Invia richiesta</button>
+            <button type="submit" className="form-submit">{tr.modal.submit}</button>
           </form>
         </div>
       </div>
@@ -516,12 +497,12 @@ export default function Home() {
       {/* ===== MOBILE MENU ===== */}
       <div className={`mobile-menu${mobileMenuOpen ? " open" : ""}`}>
         <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>&#215;</button>
-        <a href="#brand"      onClick={() => setMobileMenuOpen(false)}>Il brand</a>
-        <a href="#collezione" onClick={() => setMobileMenuOpen(false)}>Collezione</a>
-        <a href="#gallery"    onClick={() => setMobileMenuOpen(false)}>Gallery</a>
-        <a href="#community"  onClick={() => setMobileMenuOpen(false)}>Community</a>
+        <a href="#brand"      onClick={() => setMobileMenuOpen(false)}>{tr.nav.brand}</a>
+        <a href="#collezione" onClick={() => setMobileMenuOpen(false)}>{tr.nav.collezione}</a>
+        <a href="#gallery"    onClick={() => setMobileMenuOpen(false)}>{tr.nav.gallery}</a>
+        <a href="#community"  onClick={() => setMobileMenuOpen(false)}>{tr.nav.community}</a>
         <button className="mobile-menu-cta-btn" onClick={() => { setMobileMenuOpen(false); openModal(); }}>
-          Richiedi info
+          {tr.nav.cta}
         </button>
       </div>
 
@@ -533,17 +514,17 @@ export default function Home() {
           </div>
           <ul className="footer-links">
             <li><a href="https://www.instagram.com/weare.wider" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="#brand">Il brand</a></li>
-            <li><a href="#collezione">Collezione</a></li>
-            <li><a href="#community">Community</a></li>
+            <li><a href="#brand">{tr.footer.brand}</a></li>
+            <li><a href="#collezione">{tr.footer.collezione}</a></li>
+            <li><a href="#community">{tr.footer.community}</a></li>
           </ul>
           <div className="footer-divider" />
           <div className="footer-bottom">
-            <p>© 2025 WIDER. Tutti i diritti riservati.</p>
-            <p>Un universo da vivere prima ancora che da indossare.</p>
+            <p>{tr.footer.rights}</p>
+            <p>{tr.footer.tagline}</p>
           </div>
           <div className="footer-credit">
-            <p>Sito realizzato da <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
+            <p>{tr.footer.credit} <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
           </div>
         </div>
       </footer>
