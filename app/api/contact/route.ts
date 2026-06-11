@@ -194,7 +194,7 @@ export async function POST(req: NextRequest) {
             process.env.GMAIL_USER!,
             `Nuova richiesta da ${name}${product ? ` — ${product}` : ""}`,
             htmlWider(name, email, product, message),
-            `${name} via WIDER`,
+            "WIDER",
             `${name} <${email}>`
           ),
         },
