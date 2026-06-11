@@ -398,8 +398,8 @@ export default function Home() {
         />
         <span className="label fade-up">{tr.valori.label}</span>
         <div className="valori-grid">
-          {tr.valori.items.map((v) => (
-            <div key={v.title} className="valore-item fade-up">
+          {tr.valori.items.map((v, i) => (
+            <div key={i} className="valore-item fade-up">
               <h3>{v.title}</h3>
               <p>{v.desc}</p>
             </div>
@@ -415,8 +415,8 @@ export default function Home() {
           <p className="fade-up">{tr.collezione.subtitle}</p>
         </div>
         <div className="prodotti-grid">
-          {products.map((p) => (
-            <div key={p.nome} className="dest-card fade-up" onClick={() => openModal(p.nome)}>
+          {products.map((p, i) => (
+            <div key={i} className="dest-card fade-up" onClick={() => openModal(p.nome)}>
               <div className="dest-card-bg" style={{ backgroundImage: `url('${p.img}')` }} />
               <div className="dest-card-overlay" />
               <div className="dest-card-content">
