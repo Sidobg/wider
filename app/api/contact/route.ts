@@ -107,10 +107,7 @@ function htmlCliente(name: string, product: string) {
           <td align="center" style="background:#04210E;padding:48px 40px 36px;border-radius:12px 12px 0 0;">
             <img src="https://wider-rho.vercel.app/logo.jpg" alt="WIDER" width="80" height="80"
               style="border-radius:10px;display:block;margin:0 auto 20px;" />
-            <h1 style="margin:0;font-family:Georgia,serif;font-size:28px;font-weight:400;color:#FFFDF4;letter-spacing:0.04em;">
-              WIDER
-            </h1>
-            <p style="margin:8px 0 0;color:rgba(255,253,244,0.45);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;">
+            <p style="margin:0;color:rgba(255,253,244,0.45);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;">
               Rotate your perspective.
             </p>
           </td>
