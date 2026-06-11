@@ -105,12 +105,18 @@ nav.scrolled .nav-cta:hover { background: var(--verde); color: var(--panna); }
   cursor: pointer;
   font-size: 22px;
   line-height: 1;
-  padding: 2px 4px;
-  border-radius: 4px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.2s, opacity 0.2s;
   opacity: 0.85;
 }
-.lang-toggle:hover { opacity: 1; transform: scale(1.15); }
+.lang-toggle:hover { opacity: 1; transform: scale(1.12); }
 
 .hamburger {
   display: none;
