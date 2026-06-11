@@ -270,7 +270,7 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 
 .scroll-indicator {
   position: absolute;
-  bottom: 36px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
