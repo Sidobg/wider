@@ -11,12 +11,12 @@ function getOAuth2Client() {
   return client;
 }
 
-function buildRaw(to: string, subject: string, html: string) {
-  const from = `WIDER <${process.env.GMAIL_USER}>`;
+function buildRaw(to: string, subject: string, html: string, customerName: string, customerEmail: string) {
+  const from = `${customerName} via WIDER <${process.env.GMAIL_USER}>`;
   const msg = [
     `From: ${from}`,
     `To: ${to}`,
-    `Reply-To: ${to}`,
+    `Reply-To: ${customerName} <${customerEmail}>`,
     `Subject: =?utf-8?B?${Buffer.from(subject).toString("base64")}?=`,
     "MIME-Version: 1.0",
     "Content-Type: text/html; charset=utf-8",
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 
     await gmail.users.messages.send({
       userId: "me",
-      requestBody: { raw: buildRaw(process.env.GMAIL_USER!, subject, html) },
+      requestBody: { raw: buildRaw(process.env.GMAIL_USER!, subject, html, name, email) },
     });
 
     return NextResponse.json({ success: true });
