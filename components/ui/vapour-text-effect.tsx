@@ -23,6 +23,7 @@ type VaporizeTextCycleProps = {
     vaporizeDuration?: number;
     fadeInDuration?: number;
     waitDuration?: number;
+    initialDelay?: number;
   };
   direction?: "left-to-right" | "right-to-left";
   alignment?: "left" | "center" | "right";
@@ -111,7 +112,8 @@ export default function VaporizeTextCycle({
     VAPORIZE_DURATION: (animation.vaporizeDuration ?? 2) * 1000,
     FADE_IN_DURATION: (animation.fadeInDuration ?? 1) * 1000,
     WAIT_DURATION: (animation.waitDuration ?? 0.5) * 1000,
-  }), [animation.vaporizeDuration, animation.fadeInDuration, animation.waitDuration]);
+    INITIAL_DELAY: (animation.initialDelay ?? 0) * 1000,
+  }), [animation.vaporizeDuration, animation.fadeInDuration, animation.waitDuration, animation.initialDelay]);
 
   const fontConfig = useMemo(() => {
     const fontSize = parseInt(font.fontSize?.replace("px", "") || "50");
@@ -145,7 +147,7 @@ export default function VaporizeTextCycle({
     if (isInView) {
       const startAnimationTimeout = setTimeout(() => {
         setAnimationState("vaporizing");
-      }, 0);
+      }, animationDurations.INITIAL_DELAY);
       return () => clearTimeout(startAnimationTimeout);
     } else {
       setAnimationState("static");
@@ -154,7 +156,7 @@ export default function VaporizeTextCycle({
         animationFrameRef.current = null;
       }
     }
-  }, [isInView]);
+  }, [isInView, animationDurations.INITIAL_DELAY]);
 
   useEffect(() => {
     if (!isInView) return;
