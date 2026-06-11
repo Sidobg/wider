@@ -365,21 +365,25 @@ const handleFontChange = ({
   if (currentFont !== lastFontRef.current) {
     lastFontRef.current = currentFont;
 
-    const timeoutId = setTimeout(() => {
-      cleanup({ canvasRef, particlesRef });
-      renderCanvas({
-        framerProps,
-        canvasRef,
-        wrapperSize,
-        particlesRef,
-        globalDpr,
-        currentTextIndex,
-        transformedDensity,
-      });
-    }, 1000);
+    let cancelled = false;
+    const fontsReady = typeof document !== "undefined" ? document.fonts.ready : Promise.resolve();
+    fontsReady.then(() => {
+      if (!cancelled) {
+        cleanup({ canvasRef, particlesRef });
+        renderCanvas({
+          framerProps,
+          canvasRef,
+          wrapperSize,
+          particlesRef,
+          globalDpr,
+          currentTextIndex,
+          transformedDensity,
+        });
+      }
+    });
 
     return () => {
-      clearTimeout(timeoutId);
+      cancelled = true;
       cleanup({ canvasRef, particlesRef });
     };
   }
