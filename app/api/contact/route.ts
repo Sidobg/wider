@@ -34,40 +34,41 @@ function htmlWider(name: string, email: string, product: string, message: string
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="color-scheme" content="light">
   <meta name="supported-color-schemes" content="light">
+  <style>:root{color-scheme:light}</style>
 </head>
-<body style="margin:0;padding:0;background:#F5F3EE !important;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color-scheme:light;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F3EE !important;padding:40px 20px;">
+<body style="margin:0;padding:0;background:#F5F3EE;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F3EE;padding:40px 20px;">
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
         <tr>
-          <td align="center" style="background:#04210E !important;padding:36px 40px;border-radius:12px 12px 0 0;">
+          <td align="center" style="background:#04210E;padding:36px 40px;border-radius:12px 12px 0 0;">
             <img src="https://wider-rho.vercel.app/logo.jpg" alt="WIDER" width="72" height="72"
               style="border-radius:8px;display:block;margin:0 auto 16px;" />
-            <p style="margin:0;color:#FFFDF4 !important;opacity:0.6;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">
+            <p style="margin:0;color:#FFFDF4;opacity:0.6;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">
               Nuova richiesta dal sito
             </p>
           </td>
         </tr>
         <tr>
-          <td style="background:#FFFDF4 !important;padding:40px;">
-            <h2 style="margin:0 0 8px;font-size:22px;font-weight:400;color:#04210E !important;font-family:Georgia,serif;">${name}</h2>
-            <p style="margin:0 0 32px;font-size:13px;color:#5D5449 !important;">
-              <a href="mailto:${email}" style="color:#5D5449 !important;text-decoration:none;">${email}</a>
+          <td style="background:#FFFDF4;padding:40px;">
+            <h2 style="margin:0 0 8px;font-size:22px;font-weight:400;color:#04210E;font-family:Georgia,serif;">${name}</h2>
+            <p style="margin:0 0 32px;font-size:13px;color:#5D5449;">
+              <a href="mailto:${email}" style="color:#5D5449;text-decoration:none;">${email}</a>
             </p>
             <table width="100%" cellpadding="0" cellspacing="0">
               ${product ? `<tr><td style="padding:14px 0;border-top:1px solid #EAE6DF;">
-                <p style="margin:0 0 4px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8C8479 !important;">Prodotto di interesse</p>
-                <p style="margin:0;font-size:15px;color:#04210E !important;font-weight:500;">${product}</p>
+                <p style="margin:0 0 4px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8C8479;">Prodotto di interesse</p>
+                <p style="margin:0;font-size:15px;color:#04210E;font-weight:500;">${product}</p>
               </td></tr>` : ""}
               ${message ? `<tr><td style="padding:14px 0;border-top:1px solid #EAE6DF;">
-                <p style="margin:0 0 8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8C8479 !important;">Messaggio</p>
-                <p style="margin:0;font-size:14px;color:#3D3830 !important;line-height:1.7;">${message}</p>
+                <p style="margin:0 0 8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8C8479;">Messaggio</p>
+                <p style="margin:0;font-size:14px;color:#3D3830;line-height:1.7;">${message}</p>
               </td></tr>` : ""}
             </table>
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:32px;">
               <tr><td align="center">
                 <a href="mailto:${email}"
-                  style="display:inline-block;background:#04210E !important;color:#FFFDF4 !important;text-decoration:none;
+                  style="display:inline-block;background:#04210E;color:#FFFDF4;text-decoration:none;
                          font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:14px 32px;border-radius:4px;">
                   Rispondi a ${name}
                 </a>
@@ -76,8 +77,8 @@ function htmlWider(name: string, email: string, product: string, message: string
           </td>
         </tr>
         <tr>
-          <td align="center" style="background:#EAE6DF !important;padding:20px 40px;border-radius:0 0 12px 12px;">
-            <p style="margin:0;font-size:10px;color:#8C8479 !important;letter-spacing:0.1em;text-transform:uppercase;">
+          <td align="center" style="background:#EAE6DF;padding:20px 40px;border-radius:0 0 12px 12px;">
+            <p style="margin:0;font-size:10px;color:#8C8479;letter-spacing:0.1em;text-transform:uppercase;">
               WIDER — weare.wider &nbsp;·&nbsp; Richiesta ricevuta dal form sul sito
             </p>
           </td>
@@ -97,7 +98,7 @@ function htmlCliente(name: string, product: string) {
   <meta name="color-scheme" content="light">
   <meta name="supported-color-schemes" content="light">
 </head>
-<body style="margin:0;padding:0;background:#F5F3EE !important;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color-scheme:light;">
+<body style="margin:0;padding:0;background:#F5F3EE;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F3EE;padding:40px 20px;">
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
