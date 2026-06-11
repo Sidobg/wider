@@ -186,8 +186,8 @@ export async function POST(req: NextRequest) {
     const gmail = google.gmail({ version: "v1", auth });
 
     await Promise.all([
-      // Notifica a WIDER — inserita direttamente in inbox (no SMTP, no bounce)
-      gmail.users.messages.import({
+      // Notifica a WIDER — inserita direttamente in inbox (no SMTP, no bounce, no spam filter)
+      gmail.users.messages.insert({
         userId: "me",
         requestBody: {
           raw: buildRaw(
@@ -197,7 +197,7 @@ export async function POST(req: NextRequest) {
             "WIDER",
             `${name} <${email}>`
           ),
-          labelIds: ["INBOX"],
+          labelIds: ["INBOX", "UNREAD"],
         },
       }),
       // Email di conferma al cliente
