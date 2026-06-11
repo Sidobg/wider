@@ -28,10 +28,10 @@ export const t = {
     valori: {
       label: 'I valori',
       items: [
-        { title: 'Openness', desc: 'Guardare il mondo con una prospettiva più ampia. Uscire dalle abitudini, vivere le esperienze per ciò che sono, vedere il mondo in orizzontale.' },
-        { title: 'Belonging', desc: 'Il prodotto è il simbolo. Le persone sono il brand. WIDER prende forma attraverso chi ne condivide la visione, le esperienze e il modo di vivere il mondo.' },
-        { title: 'Authenticity', desc: 'Esperienze reali. Connessioni genuine. Tutto ciò che conta nasce da momenti veri, vissuti prima di essere raccontati.' },
-        { title: 'Aesthetic', desc: "La cura del dettaglio come linguaggio. Ogni elemento, dal prodotto all'immagine, esprime l'universo WIDER e i suoi valori." },
+        { title: 'Apertura', desc: 'Guardare il mondo con una prospettiva più ampia. Uscire dalle abitudini, vivere le esperienze per ciò che sono, vedere il mondo in orizzontale.' },
+        { title: 'Appartenenza', desc: 'Il prodotto è il simbolo. Le persone sono il brand. WIDER prende forma attraverso chi ne condivide la visione, le esperienze e il modo di vivere il mondo.' },
+        { title: 'Autenticità', desc: 'Esperienze reali. Connessioni genuine. Tutto ciò che conta nasce da momenti veri, vissuti prima di essere raccontati.' },
+        { title: 'Estetica', desc: "La cura del dettaglio come linguaggio. Ogni elemento, dal prodotto all'immagine, esprime l'universo WIDER e i suoi valori." },
       ],
     },
     collezione: {
