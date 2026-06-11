@@ -540,6 +540,9 @@ export default function Home() {
             <p>© 2025 WIDER. Tutti i diritti riservati.</p>
             <p>Un universo da vivere prima ancora che da indossare.</p>
           </div>
+          <div className="footer-credit">
+            <p>Sito realizzato da <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
+          </div>
         </div>
       </footer>
     </>

@@ -797,6 +797,15 @@ footer {
 
 .footer-bottom p { color: rgba(255,253,244,0.2); font-size: 11px; letter-spacing: 0.04em; }
 
+.footer-credit {
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+}
+.footer-credit p { color: rgba(255,253,244,0.18); font-size: 10px; letter-spacing: 0.06em; }
+.footer-credit a { color: rgba(255,253,244,0.35); text-decoration: none; transition: color 0.2s; }
+.footer-credit a:hover { color: rgba(255,253,244,0.7); }
+
 /* ===== FADE ON SCROLL ===== */
 .fade-up {
   opacity: 0;
