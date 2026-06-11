@@ -39,17 +39,83 @@ export async function POST(req: NextRequest) {
 
     const subject = `Nuova richiesta da ${name}${product ? ` — ${product}` : ""}`;
     const html = `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1A1A1A;">
-        <h2 style="font-size: 20px; margin-bottom: 24px;">Nuova richiesta dal sito WIDER</h2>
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr><td style="padding: 8px 0; font-weight: bold; width: 140px;">Nome</td><td>${name}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold;">Email</td><td><a href="mailto:${email}">${email}</a></td></tr>
-          ${product ? `<tr><td style="padding: 8px 0; font-weight: bold;">Prodotto</td><td>${product}</td></tr>` : ""}
-          ${message ? `<tr><td style="padding: 8px 0; font-weight: bold; vertical-align: top;">Messaggio</td><td>${message}</td></tr>` : ""}
-        </table>
-        <hr style="margin: 24px 0; border: none; border-top: 1px solid #eee;" />
-        <p style="font-size: 12px; color: #999;">Rispondi direttamente a questa email per contattare ${name}.</p>
-      </div>
+<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#F5F3EE;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F3EE;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- HEADER -->
+        <tr>
+          <td align="center" style="background:#04210E;padding:36px 40px;border-radius:12px 12px 0 0;">
+            <img src="https://wider-rho.vercel.app/logo.jpg" alt="WIDER" width="72" height="72"
+              style="border-radius:8px;display:block;margin:0 auto 16px;" />
+            <p style="margin:0;color:rgba(255,253,244,0.5);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">
+              Nuova richiesta dal sito
+            </p>
+          </td>
+        </tr>
+
+        <!-- BODY -->
+        <tr>
+          <td style="background:#FFFDF4;padding:40px;">
+
+            <h2 style="margin:0 0 8px;font-size:22px;font-weight:400;color:#04210E;font-family:Georgia,serif;">
+              ${name}
+            </h2>
+            <p style="margin:0 0 32px;font-size:13px;color:#8C8479;">
+              <a href="mailto:${email}" style="color:#8C8479;text-decoration:none;">${email}</a>
+            </p>
+
+            <table width="100%" cellpadding="0" cellspacing="0">
+              ${product ? `
+              <tr>
+                <td style="padding:14px 0;border-top:1px solid #EAE6DF;">
+                  <p style="margin:0 0 4px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#B0A89E;">Prodotto di interesse</p>
+                  <p style="margin:0;font-size:15px;color:#04210E;font-weight:500;">${product}</p>
+                </td>
+              </tr>` : ""}
+              ${message ? `
+              <tr>
+                <td style="padding:14px 0;border-top:1px solid #EAE6DF;">
+                  <p style="margin:0 0 8px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#B0A89E;">Messaggio</p>
+                  <p style="margin:0;font-size:14px;color:#3D3830;line-height:1.7;">${message}</p>
+                </td>
+              </tr>` : ""}
+            </table>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:32px;">
+              <tr>
+                <td align="center">
+                  <a href="mailto:${email}"
+                    style="display:inline-block;background:#04210E;color:#FFFDF4;text-decoration:none;
+                           font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+                           padding:14px 32px;border-radius:4px;">
+                    Rispondi a ${name}
+                  </a>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td align="center" style="background:#EAE6DF;padding:20px 40px;border-radius:0 0 12px 12px;">
+            <p style="margin:0;font-size:10px;color:#B0A89E;letter-spacing:0.1em;text-transform:uppercase;">
+              WIDER — weare.wider &nbsp;·&nbsp; Richiesta ricevuta dal form sul sito
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
     `;
 
     await gmail.users.messages.send({
