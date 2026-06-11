@@ -120,9 +120,11 @@ export default function Home() {
       const startH = mob ? 604 : 533;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
+      const endW = vw;
+      const endH = mob ? vh : Math.round(vw * 9 / 21);
 
-      mc.style.width        = Math.min(startW + p * (vw - startW), vw) + "px";
-      mc.style.height       = Math.min(startH + p * (vh - startH), vh) + "px";
+      mc.style.width        = Math.min(startW + p * (endW - startW), endW) + "px";
+      mc.style.height       = Math.min(startH + p * (endH - startH), endH) + "px";
       mc.style.borderRadius = 20 * (1 - p) + "px";
       bg.style.opacity      = String(1 - p);
 
