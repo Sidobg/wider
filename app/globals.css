@@ -329,22 +329,22 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   font-size: clamp(1.9rem, 4vw, 3.4rem);
   font-weight: 400;
   line-height: 1.45;
-  color: var(--verde);
+  color: #16652F;
   max-width: 860px;
   margin: 0 auto 56px;
   min-height: 2.9em;
 }
 
-.manifesto em { font-style: italic; color: var(--verde); }
+.manifesto em { font-style: italic; color: #16652F; }
 
 .manifesto-line { display: block; }
 .manifesto-inline { display: inline; }
-.manifesto-em { color: var(--verde); font-style: italic; }
+.manifesto-em { color: #16652F; font-style: italic; }
 
 .section-brand > p {
   font-size: clamp(0.9rem, 1.4vw, 1.05rem);
   line-height: 1.85;
-  color: var(--verde);
+  color: #16652F;
   max-width: 580px;
   margin: 0 auto;
 }
