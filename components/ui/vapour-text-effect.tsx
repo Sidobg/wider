@@ -220,6 +220,7 @@ export default function VaporizeTextCycle({
           ctx.restore();
 
           if (fadeOpacityRef.current >= 1) {
+            resetParticles(particlesRef.current);
             setAnimationState("waiting");
             setTimeout(() => {
               setAnimationState("vaporizing");
