@@ -291,13 +291,15 @@ export default function Home() {
         <div className="nav-pill-wrapper">
           <NavHeader items={navItems} scrolled={navScrolled} />
         </div>
-        <button className="lang-toggle" onClick={() => setLang(lang === "it" ? "en" : "it")} aria-label="Switch language">
-          {lang === "it" ? "🇬🇧" : "🇮🇹"}
-        </button>
-        <button className="nav-cta" onClick={() => openModal()}>{tr.nav.cta}</button>
-        <button className="hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
-          <span /><span />
-        </button>
+        <div className="nav-actions">
+          <button className="lang-toggle" onClick={() => setLang(lang === "it" ? "en" : "it")} aria-label="Switch language">
+            {lang === "it" ? "🇬🇧" : "🇮🇹"}
+          </button>
+          <button className="nav-cta" onClick={() => openModal()}>{tr.nav.cta}</button>
+          <button className="hamburger" aria-label="Menu" onClick={() => setMobileMenuOpen(true)}>
+            <span /><span />
+          </button>
+        </div>
       </nav>
 
       {/* ===== HERO ===== */}
