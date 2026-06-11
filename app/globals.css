@@ -313,55 +313,6 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   text-align: center;
   position: relative;
   z-index: 20;
-  overflow: hidden;
-}
-
-/* Globo decorativo dietro il testo */
-.manifesto-globe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(420px, 80vw, 840px);
-  z-index: 0;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* Velatura panna per leggibilità (sopra il globo, sotto il testo) */
-.manifesto-scrim {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(560px, 76%);
-  height: 52%;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 253, 244, 0.82) 0%,
-    rgba(255, 253, 244, 0.5) 45%,
-    rgba(255, 253, 244, 0) 72%
-  );
-}
-
-/* Testo sempre sopra al globo */
-.section-brand > .label,
-.section-brand > .divider,
-.section-brand > .manifesto,
-.section-brand > p {
-  position: relative;
-  z-index: 1;
-}
-
-/* Alone panna per leggibilità sopra il globo */
-.section-brand > .manifesto {
-  text-shadow: 0 0 8px var(--panna), 0 0 16px var(--panna), 0 0 28px var(--panna), 0 0 40px var(--panna);
-}
-
-.section-brand > p {
-  text-shadow: 0 1px 2px var(--panna), 0 0 8px var(--panna), 0 0 16px var(--panna), 0 0 26px var(--panna);
 }
 
 .label {

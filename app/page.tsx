@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 import { NavHeader } from "@/components/ui/nav-header";
 import { TextEffect } from "@/components/ui/text-effect";
-import { GlobePulse } from "@/components/ui/cobe-globe-pulse";
 import { WorldMap } from "@/components/ui/map";
 import { AnimatedText } from "@/components/ui/animated-shiny-text";
 import VaporizeTextCycle, { Tag } from "@/components/ui/vapour-text-effect";
@@ -344,10 +343,6 @@ export default function Home() {
 
       {/* ===== MANIFESTO ===== */}
       <section className="section-brand" id="brand">
-        <div className="manifesto-globe" aria-hidden="true">
-          <GlobePulse speed={0.0025} pulseColor="#7EC8DC" />
-        </div>
-        <div className="manifesto-scrim" aria-hidden="true" />
         <span className="label fade-up">Il Manifesto</span>
         <div className="divider fade-up" />
         <h2 className="manifesto" ref={manifestoRef}>
