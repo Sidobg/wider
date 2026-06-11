@@ -117,7 +117,7 @@ export default function Home() {
 
       const mob    = window.innerWidth < 768;
       const startW = mob ? 340 : 300;
-      const startH = mob ? 560 : 420;
+      const startH = mob ? 604 : 533;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
 

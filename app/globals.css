@@ -198,7 +198,7 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
-  height: 420px;
+  height: 533px;
   border-radius: 20px;
   overflow: hidden;
   z-index: 2;
@@ -206,7 +206,7 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 }
 
 @media (max-width: 768px) {
-  .media-container { width: 340px; height: 560px; }
+  .media-container { width: 340px; height: 604px; }
 }
 
 .media-container video { width: 100%; height: 100%; object-fit: cover; }
