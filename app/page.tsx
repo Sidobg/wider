@@ -45,6 +45,11 @@ export default function Home() {
   const [cardSize,       setCardSize]       = useState({ w: 480, h: 320 });
   const [manifestoInView, setManifestoInView] = useState(false);
   const [vaporFont,      setVaporFont]      = useState("60px");
+  const [formSending,    setFormSending]    = useState(false);
+
+  const nameRef    = useRef<HTMLInputElement>(null);
+  const emailRef   = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const tr = t[lang];
   const navItems = [
@@ -275,10 +280,31 @@ export default function Home() {
 
   const closeModal = useCallback(() => setModalOpen(false), []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Richiesta inviata! Ti risponderemo presto.");
-    closeModal();
+    setFormSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: nameRef.current?.value,
+          email: emailRef.current?.value,
+          product: modalProduct,
+          message: messageRef.current?.value,
+        }),
+      });
+      if (res.ok) {
+        alert(lang === "it" ? "Richiesta inviata! Ti risponderemo presto." : "Request sent! We'll get back to you soon.");
+        closeModal();
+      } else {
+        alert(lang === "it" ? "Errore nell'invio. Riprova." : "Error sending. Please try again.");
+      }
+    } catch {
+      alert(lang === "it" ? "Errore nell'invio. Riprova." : "Error sending. Please try again.");
+    } finally {
+      setFormSending(false);
+    }
   };
 
   return (
@@ -473,11 +499,11 @@ export default function Home() {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>{tr.modal.name}</label>
-              <input type="text" placeholder={tr.modal.namePlaceholder} required />
+              <input ref={nameRef} type="text" placeholder={tr.modal.namePlaceholder} required />
             </div>
             <div className="form-group">
               <label>{tr.modal.email}</label>
-              <input type="email" placeholder={tr.modal.emailPlaceholder} required />
+              <input ref={emailRef} type="email" placeholder={tr.modal.emailPlaceholder} required />
             </div>
             <div className="form-group">
               <label>{tr.modal.product}</label>
@@ -489,9 +515,11 @@ export default function Home() {
             </div>
             <div className="form-group">
               <label>{tr.modal.message}</label>
-              <textarea placeholder={tr.modal.messagePlaceholder} />
+              <textarea ref={messageRef} placeholder={tr.modal.messagePlaceholder} />
             </div>
-            <button type="submit" className="form-submit">{tr.modal.submit}</button>
+            <button type="submit" className="form-submit" disabled={formSending}>
+              {formSending ? "..." : tr.modal.submit}
+            </button>
           </form>
         </div>
       </div>
