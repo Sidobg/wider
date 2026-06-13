@@ -366,7 +366,12 @@ const handleFontChange = ({
     lastFontRef.current = currentFont;
 
     let cancelled = false;
-    const fontsReady = typeof document !== "undefined" ? document.fonts.ready : Promise.resolve();
+    // Su mobile document.fonts.ready può essere lento (aspetta TUTTI i font).
+    // Il canvas usa già un fallback sans-serif, quindi limitiamo l'attesa a 150ms
+    // così la scritta compare subito senza aspettare il download completo dei font.
+    const fontsReady = typeof document !== "undefined"
+      ? Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 150))])
+      : Promise.resolve();
     fontsReady.then(() => {
       if (!cancelled) {
         cleanup({ canvasRef, particlesRef });
