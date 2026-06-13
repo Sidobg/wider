@@ -57,11 +57,13 @@ function ProductCard({
   photos,
   cta,
   onRequest,
+  onZoom,
 }: {
   nome: string;
   photos: string[];
   cta: string;
   onRequest: () => void;
+  onZoom: (photos: string[], idx: number, nome: string) => void;
 }) {
   const [idx, setIdx] = useState(0);
   const n = photos.length;
@@ -72,6 +74,10 @@ function ProductCard({
   const dot = (e: React.MouseEvent, i: number) => {
     e.stopPropagation();
     setIdx(i);
+  };
+  const zoom = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onZoom(photos, idx, nome);
   };
 
   return (
@@ -92,6 +98,15 @@ function ProductCard({
         </div>
       ))}
       <div className="dest-card-overlay" />
+
+      <button className="dest-card-zoom" onClick={zoom} aria-label="Ingrandisci foto">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          <line x1="11" y1="8" x2="11" y2="14" />
+          <line x1="8" y1="11" x2="14" y2="11" />
+        </svg>
+      </button>
 
       {n > 1 && (
         <>
@@ -137,6 +152,7 @@ export default function Home() {
   const [manifestoInView, setManifestoInView] = useState(false);
   const [vaporFont,      setVaporFont]      = useState("60px");
   const [formSending,    setFormSending]    = useState(false);
+  const [lightbox,       setLightbox]       = useState<{ photos: string[]; idx: number; nome: string } | null>(null);
 
   const nameRef    = useRef<HTMLInputElement>(null);
   const emailRef   = useRef<HTMLInputElement>(null);
@@ -352,16 +368,22 @@ export default function Home() {
 
   // Body overflow lock
   useEffect(() => {
-    document.body.style.overflow = modalOpen || mobileMenuOpen ? "hidden" : "";
+    document.body.style.overflow = modalOpen || mobileMenuOpen || lightbox ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [modalOpen, mobileMenuOpen]);
+  }, [modalOpen, mobileMenuOpen, lightbox]);
 
-  // Keyboard Escape
+  // Keyboard Escape + frecce nel lightbox
   useEffect(() => {
-    const handle = (e: KeyboardEvent) => { if (e.key === "Escape") setModalOpen(false); };
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setModalOpen(false); setLightbox(null); }
+      if (lightbox) {
+        if (e.key === "ArrowLeft")  setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.photos.length) % l.photos.length });
+        if (e.key === "ArrowRight") setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.photos.length });
+      }
+    };
     document.addEventListener("keydown", handle);
     return () => document.removeEventListener("keydown", handle);
-  }, []);
+  }, [lightbox]);
 
   const openModal = useCallback((product = "") => {
     setModalProduct(product);
@@ -512,6 +534,7 @@ export default function Home() {
               photos={p.photos}
               cta={tr.collezione.cta}
               onRequest={() => openModal(p.nome)}
+              onZoom={(photos, idx, nome) => setLightbox({ photos, idx, nome })}
             />
           ))}
         </div>
@@ -568,6 +591,45 @@ export default function Home() {
           {tr.community.cta}
         </a>
       </section>
+
+      {/* ===== LIGHTBOX ===== */}
+      {lightbox && (
+        <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
+          <button className="lightbox-close" onClick={() => setLightbox(null)} aria-label="Chiudi">&#215;</button>
+          {lightbox.photos.length > 1 && (
+            <button
+              className="lightbox-nav prev"
+              onClick={(e) => { e.stopPropagation(); setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.photos.length) % l.photos.length }); }}
+              aria-label="Foto precedente"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+            </button>
+          )}
+          <div className="lightbox-img-wrap" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={lightbox.photos[lightbox.idx]!}
+              alt={lightbox.nome}
+              fill
+              className="object-contain"
+              sizes="100vw"
+              priority
+            />
+          </div>
+          {lightbox.photos.length > 1 && (
+            <button
+              className="lightbox-nav next"
+              onClick={(e) => { e.stopPropagation(); setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.photos.length }); }}
+              aria-label="Foto successiva"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+            </button>
+          )}
+          <div className="lightbox-caption">
+            {lightbox.nome}
+            {lightbox.photos.length > 1 && <span> · {lightbox.idx + 1}/{lightbox.photos.length}</span>}
+          </div>
+        </div>
+      )}
 
       {/* ===== MODAL ===== */}
       <div
