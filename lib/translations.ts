@@ -45,8 +45,7 @@ export const t = {
         { nome: 'Cappello Verde'     },
         { nome: 'Cowboy'             },
         { nome: 'Foulard'            },
-        { nome: 'Long Sleeve Uomo'   },
-        { nome: 'Long Sleeve Donna'  },
+        { nome: 'Long Sleeve'        },
       ],
     },
     gallery: {
@@ -151,8 +150,7 @@ export const t = {
         { nome: 'Green Hat'          },
         { nome: 'Cowboy'             },
         { nome: 'Foulard'            },
-        { nome: 'Long Sleeve Men'    },
-        { nome: 'Long Sleeve Women'  },
+        { nome: 'Long Sleeve'        },
       ],
     },
     gallery: {
