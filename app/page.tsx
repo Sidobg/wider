@@ -542,9 +542,15 @@ export default function Home() {
         <div className="guida-taglie-wrap fade-up">
           <button
             className="guida-taglie-btn"
-            onClick={() => setLightbox({ photos: ["/products/guida-taglie.jpg"], idx: 0, nome: tr.collezione.sizeGuide })}
+            onClick={() => setLightbox({ photos: ["/products/guida-taglie.jpg"], idx: 0, nome: tr.collezione.sizeGuideLongsleeve })}
           >
-            {tr.collezione.sizeGuide}
+            {tr.collezione.sizeGuideLongsleeve}
+          </button>
+          <button
+            className="guida-taglie-btn guida-taglie-btn--soon"
+            disabled
+          >
+            {tr.collezione.sizeGuideTshirt}
           </button>
         </div>
       </section>
