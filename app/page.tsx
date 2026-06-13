@@ -20,11 +20,23 @@ const communityDots = [
 ];
 
 const galleryImgs = [
-  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
-  "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80",
-  "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
-  "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
-  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+  "/gallery/IMG_8178.jpg",
+  "/gallery/IMG_8190.jpg",
+  "/gallery/IMG_8294.jpg",
+  "/gallery/IMG_8448.jpg",
+  "/gallery/IMG_8691.jpg",
+  "/gallery/IMG_8694.jpg",
+  "/gallery/IMG_8759.jpg",
+  "/gallery/IMG_8802.jpg",
+  "/gallery/IMG_8848.jpg",
+  "/gallery/IMG_8908.jpg",
+  "/gallery/IMG_9058.jpg",
+  "/gallery/IMG_9082.jpg",
+  "/gallery/IMG_9103.jpg",
+  "/gallery/IMG_9198.jpg",
+  "/gallery/IMG_9286.jpg",
+  "/gallery/IMG_9320.jpg",
+  "/gallery/IMG_9470.jpg",
 ];
 
 const productImgs = [
