@@ -154,10 +154,12 @@ export default function Home() {
   const [vaporFont,      setVaporFont]      = useState("60px");
   const [formSending,    setFormSending]    = useState(false);
   const [lightbox,       setLightbox]       = useState<{ photos: string[]; idx: number; nome: string } | null>(null);
+  const [modalOpenTime,  setModalOpenTime]  = useState(0);
 
-  const nameRef    = useRef<HTMLInputElement>(null);
-  const emailRef   = useRef<HTMLInputElement>(null);
-  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const nameRef      = useRef<HTMLInputElement>(null);
+  const emailRef     = useRef<HTMLInputElement>(null);
+  const messageRef   = useRef<HTMLTextAreaElement>(null);
+  const honeypotRef  = useRef<HTMLInputElement>(null);
 
   const tr = t[lang];
   const navItems = [
@@ -389,6 +391,7 @@ export default function Home() {
   const openModal = useCallback((product = "") => {
     setModalProduct(product);
     setModalOpen(true);
+    setModalOpenTime(Date.now());
   }, []);
 
   const closeModal = useCallback(() => setModalOpen(false), []);
@@ -405,6 +408,8 @@ export default function Home() {
           email: emailRef.current?.value,
           product: modalProduct,
           message: messageRef.current?.value,
+          hp: honeypotRef.current?.value,
+          openedAt: modalOpenTime,
         }),
       });
       if (res.ok) {
@@ -656,6 +661,7 @@ export default function Home() {
           <h3>{tr.modal.title}</h3>
           <p className="modal-subtitle">{tr.modal.subtitle}</p>
           <form onSubmit={handleSubmit}>
+            <input ref={honeypotRef} type="text" name="website" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }} />
             <div className="form-group">
               <label>{tr.modal.name}</label>
               <input ref={nameRef} type="text" placeholder={tr.modal.namePlaceholder} required />

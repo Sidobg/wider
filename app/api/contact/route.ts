@@ -176,10 +176,20 @@ function htmlCliente(name: string, product: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, product, message } = await req.json();
+    const { name, email, product, message, hp, openedAt } = await req.json();
 
     if (!name || !email) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    // Honeypot: se il campo nascosto è stato compilato è un bot
+    if (hp) {
+      return NextResponse.json({ success: true });
+    }
+
+    // Tempo minimo: meno di 3 secondi = bot
+    if (openedAt && Date.now() - openedAt < 3000) {
+      return NextResponse.json({ success: true });
     }
 
     const auth = getOAuth2Client();
