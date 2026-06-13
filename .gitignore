@@ -43,3 +43,6 @@ next-env.d.ts
 # documenti locali
 claude.odt
 *.odt
+
+# Video sorgente (non usati in produzione)
+public/*.mov
