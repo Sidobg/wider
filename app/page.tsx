@@ -459,7 +459,7 @@ export default function Home() {
                 color="rgb(255,253,244)"
                 spread={4}
                 density={6}
-                animation={{ vaporizeDuration: 2.2, fadeInDuration: 1.2, waitDuration: 3, initialDelay: 3 }}
+                animation={{ vaporizeDuration: 2.2, fadeInDuration: 1.2, waitDuration: 3, initialDelay: 2 }}
                 direction="left-to-right"
                 alignment="center"
                 tag={Tag.H1}
