@@ -583,6 +583,27 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 .dest-card-zoom:hover { background: rgba(4,33,14,0.7); }
 @media (max-width: 768px) { .dest-card-zoom { opacity: 1; } }
 
+/* ===== GlowButton (Guida alle taglie) ===== */
+@keyframes speen {
+  0%   { transform: rotate(10deg); }
+  50%  { transform: rotate(190deg); }
+  100% { transform: rotate(370deg); }
+}
+@keyframes woah {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(0.75); }
+}
+.glow-btn .glow-rot { animation: none; }
+.glow-btn:hover .glow-rot {
+  animation: speen 8s cubic-bezier(0.56,0.15,0.28,0.86) infinite, woah 4s infinite;
+}
+
+.guida-taglie-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
 /* ===== Lightbox ===== */
 .lightbox-overlay {
   position: fixed;

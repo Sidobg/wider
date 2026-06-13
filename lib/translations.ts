@@ -39,6 +39,7 @@ export const t = {
       title: 'First Vision — Summer Collection',
       subtitle: 'Scopri i nostri capi. Scrivi una richiesta per ricevere informazioni.',
       cta: 'Richiedi info',
+      sizeGuide: 'Guida alle taglie',
       products: [
         { nome: 'Cappello Beige'     },
         { nome: 'Cappello Verde'     },
@@ -144,6 +145,7 @@ export const t = {
       title: 'First Vision — Summer Collection',
       subtitle: 'Discover our pieces. Send a request to receive information.',
       cta: 'Request info',
+      sizeGuide: 'Size guide',
       products: [
         { nome: 'Beige Hat'          },
         { nome: 'Green Hat'          },

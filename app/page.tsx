@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
+import { GlowButton } from "@/components/ui/shiny-button-1";
 import { NavHeader } from "@/components/ui/nav-header";
 import { TextEffect } from "@/components/ui/text-effect";
 import { WorldMap } from "@/components/ui/map";
@@ -537,6 +538,11 @@ export default function Home() {
               onZoom={(photos, idx, nome) => setLightbox({ photos, idx, nome })}
             />
           ))}
+        </div>
+        <div className="guida-taglie-wrap fade-up">
+          <GlowButton onClick={() => setLightbox({ photos: ["/products/guida-taglie.jpg"], idx: 0, nome: tr.collezione.sizeGuide })}>
+            {tr.collezione.sizeGuide}
+          </GlowButton>
         </div>
       </section>
 
