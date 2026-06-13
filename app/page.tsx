@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 import { NavHeader } from "@/components/ui/nav-header";
 import { TextEffect } from "@/components/ui/text-effect";
@@ -39,14 +40,92 @@ const galleryImgs = [
   "/gallery/IMG_9470.jpg",
 ];
 
-const productImgs = [
-  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
-  "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
-  "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=80",
-  "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
-  "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80",
-  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+const productSlugs = [
+  { slug: "cappello-beige",    count: 3 },
+  { slug: "cappello-verde",    count: 4 },
+  { slug: "cowboy",            count: 9 },
+  { slug: "foulard",           count: 4 },
+  { slug: "long-sleeve-uomo",  count: 3 },
+  { slug: "long-sleeve-donna", count: 3 },
 ];
+const productPhotos: string[][] = productSlugs.map((s) =>
+  Array.from({ length: s.count }, (_, i) => `/products/${s.slug}/${i + 1}.jpg`)
+);
+
+function ProductCard({
+  nome,
+  photos,
+  cta,
+  onRequest,
+}: {
+  nome: string;
+  photos: string[];
+  cta: string;
+  onRequest: () => void;
+}) {
+  const [idx, setIdx] = useState(0);
+  const n = photos.length;
+  const go = (e: React.MouseEvent, dir: number) => {
+    e.stopPropagation();
+    setIdx((i) => (i + dir + n) % n);
+  };
+  const dot = (e: React.MouseEvent, i: number) => {
+    e.stopPropagation();
+    setIdx(i);
+  };
+
+  return (
+    <div className="dest-card fade-up" onClick={onRequest}>
+      {photos.map((src, i) => (
+        <div
+          key={i}
+          className="dest-card-bg"
+          style={{ opacity: i === idx ? 1 : 0 }}
+        >
+          <Image
+            src={src}
+            alt={nome}
+            fill
+            className="object-cover"
+            sizes="(max-width: 560px) 90vw, (max-width: 1024px) 45vw, 380px"
+          />
+        </div>
+      ))}
+      <div className="dest-card-overlay" />
+
+      {n > 1 && (
+        <>
+          <button className="dest-card-nav prev" onClick={(e) => go(e, -1)} aria-label="Foto precedente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+          </button>
+          <button className="dest-card-nav next" onClick={(e) => go(e, 1)} aria-label="Foto successiva">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+          </button>
+          <div className="dest-card-dots" onClick={(e) => e.stopPropagation()}>
+            {photos.map((_, i) => (
+              <span
+                key={i}
+                className={i === idx ? "on" : ""}
+                onClick={(e) => dot(e, i)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      <div className="dest-card-content">
+        <div className="dest-card-nome">{nome}</div>
+        <button className="dest-card-btn">
+          <span>{cta}</span>
+          <svg className="dest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [lang,           setLang]           = useState<Lang>("it");
@@ -78,8 +157,7 @@ export default function Home() {
   }));
   const products = tr.collezione.products.map((p, i) => ({
     nome: p.nome,
-    tipo: p.tipo,
-    img: productImgs[i],
+    photos: productPhotos[i] ?? [],
   }));
 
   const manifestoRef = useRef<HTMLHeadingElement>(null);
@@ -428,21 +506,13 @@ export default function Home() {
         </div>
         <div className="prodotti-grid">
           {products.map((p, i) => (
-            <div key={i} className="dest-card fade-up" onClick={() => openModal(p.nome)}>
-              <div className="dest-card-bg" style={{ backgroundImage: `url('${p.img}')` }} />
-              <div className="dest-card-overlay" />
-              <div className="dest-card-content">
-                <div className="dest-card-nome">{p.nome}</div>
-                <div className="dest-card-tipo">{p.tipo}</div>
-                <button className="dest-card-btn">
-                  <span>{tr.collezione.cta}</span>
-                  <svg className="dest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+            <ProductCard
+              key={i}
+              nome={p.nome}
+              photos={p.photos}
+              cta={tr.collezione.cta}
+              onRequest={() => openModal(p.nome)}
+            />
           ))}
         </div>
       </section>
