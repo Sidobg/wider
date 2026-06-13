@@ -46,6 +46,8 @@ export const t = {
         { nome: 'Cowboy'             },
         { nome: 'Foulard'            },
         { nome: 'Long Sleeve'        },
+        { nome: 'T-Shirt Verde'      },
+        { nome: 'T-Shirt Bianca'     },
       ],
     },
     gallery: {
@@ -151,6 +153,8 @@ export const t = {
         { nome: 'Cowboy'             },
         { nome: 'Foulard'            },
         { nome: 'Long Sleeve'        },
+        { nome: 'Green T-Shirt'      },
+        { nome: 'White T-Shirt'      },
       ],
     },
     gallery: {

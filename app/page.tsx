@@ -46,6 +46,8 @@ const productSlugs = [
   { slug: "cowboy",            count: 9 },
   { slug: "foulard",           count: 4 },
   { slug: "long-sleeve",       count: 6 },
+  { slug: "t-shirt-verde",    count: 3 },
+  { slug: "t-shirt-bianca",   count: 4 },
 ];
 const productPhotos: string[][] = productSlugs.map((s) =>
   Array.from({ length: s.count }, (_, i) => `/products/${s.slug}/${i + 1}.jpg`)
