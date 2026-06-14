@@ -58,6 +58,7 @@ function ProductCard({
   nome,
   photos,
   cta,
+  prezzo,
   objectPosition = "center",
   onRequest,
   onZoom,
@@ -65,6 +66,7 @@ function ProductCard({
   nome: string;
   photos: string[];
   cta: string;
+  prezzo?: string;
   objectPosition?: string;
   onRequest: () => void;
   onZoom: (photos: string[], idx: number, nome: string) => void;
@@ -135,6 +137,9 @@ function ProductCard({
 
       <div className="dest-card-content">
         <div className="dest-card-nome">{nome}</div>
+        {prezzo && (
+          <div className={`dest-card-prezzo${prezzo === 'Sold out' ? ' sold-out' : ''}`}>{prezzo}</div>
+        )}
         <button className="dest-card-btn">
           <span>{cta}</span>
           <svg className="dest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -180,6 +185,7 @@ export default function Home() {
   }));
   const products = tr.collezione.products.map((p, i) => ({
     nome: p.nome,
+    prezzo: p.prezzo,
     photos: productPhotos[i] ?? [],
   }));
 
@@ -543,6 +549,7 @@ export default function Home() {
               nome={p.nome}
               photos={productPhotos[i].photos}
               objectPosition={productPhotos[i].objectPosition}
+              prezzo={p.prezzo}
               cta={tr.collezione.cta}
               onRequest={() => openModal(p.nome)}
               onZoom={(photos, idx, nome) => setLightbox({ photos, idx, nome })}

@@ -731,6 +731,22 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   margin-top: 6px;
 }
 
+.dest-card-prezzo {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--panna);
+  opacity: 0.9;
+}
+
+.dest-card-prezzo.sold-out {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+
 .dest-card-btn {
   margin-top: 24px;
   display: flex;
