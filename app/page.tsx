@@ -730,6 +730,9 @@ export default function Home() {
             <p>{tr.footer.rights}</p>
             <p>{tr.footer.tagline}</p>
           </div>
+          <div className="footer-credit">
+            <p>{tr.footer.credit} <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
+          </div>
         </div>
       </footer>
     </>
