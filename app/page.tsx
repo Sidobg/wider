@@ -41,28 +41,31 @@ const galleryImgs = [
 ];
 
 const productSlugs = [
-  { slug: "cappello-beige",    count: 3 },
-  { slug: "cappello-verde",    count: 4 },
-  { slug: "cowboy",            count: 9 },
-  { slug: "foulard",           count: 4 },
-  { slug: "long-sleeve",       count: 6 },
-  { slug: "t-shirt-verde",    count: 3 },
-  { slug: "t-shirt-bianca",   count: 4 },
+  { slug: "cappello-beige",  count: 3 },
+  { slug: "cappello-verde",  count: 4 },
+  { slug: "cowboy",          count: 9 },
+  { slug: "foulard",         count: 4, objectPosition: "top" },
+  { slug: "long-sleeve",     count: 6 },
+  { slug: "t-shirt-verde",   count: 3 },
+  { slug: "t-shirt-bianca",  count: 4 },
 ];
-const productPhotos: string[][] = productSlugs.map((s) =>
-  Array.from({ length: s.count }, (_, i) => `/products/${s.slug}/${i + 1}.jpg`)
-);
+const productPhotos = productSlugs.map((s) => ({
+  photos: Array.from({ length: s.count }, (_, i) => `/products/${s.slug}/${i + 1}.jpg`),
+  objectPosition: s.objectPosition ?? "center",
+}));
 
 function ProductCard({
   nome,
   photos,
   cta,
+  objectPosition = "center",
   onRequest,
   onZoom,
 }: {
   nome: string;
   photos: string[];
   cta: string;
+  objectPosition?: string;
   onRequest: () => void;
   onZoom: (photos: string[], idx: number, nome: string) => void;
 }) {
@@ -94,6 +97,7 @@ function ProductCard({
             alt={nome}
             fill
             className="object-cover"
+            style={{ objectPosition }}
             sizes="(max-width: 560px) 90vw, (max-width: 1024px) 45vw, 380px"
           />
         </div>
@@ -537,7 +541,8 @@ export default function Home() {
             <ProductCard
               key={i}
               nome={p.nome}
-              photos={p.photos}
+              photos={productPhotos[i].photos}
+              objectPosition={productPhotos[i].objectPosition}
               cta={tr.collezione.cta}
               onRequest={() => openModal(p.nome)}
               onZoom={(photos, idx, nome) => setLightbox({ photos, idx, nome })}
