@@ -21,7 +21,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js" async />
+        <script id="lb_cs" type="text/javascript" dangerouslySetInnerHTML={{ __html: 'lb_cs("6a2f270b0000de0029a6d9e4");' }} />
+      </body>
     </html>
   );
 }

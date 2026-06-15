@@ -731,6 +731,9 @@ export default function Home() {
             <p>{tr.footer.tagline}</p>
             <a href="/privacy" className="footer-privacy-link">Privacy Policy</a>
             <a href="/cookie" className="footer-privacy-link">Cookie Policy</a>
+            <a href="#" className="footer-privacy-link lb-cs-settings-link">
+              {lang === "it" ? "Preferenze cookie" : "Cookie preferences"}
+            </a>
           </div>
           <div className="footer-credit">
             <p>{tr.footer.credit} <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
