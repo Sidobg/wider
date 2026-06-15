@@ -1036,6 +1036,8 @@ footer {
 }
 
 .footer-bottom p { color: rgba(255,253,244,0.2); font-size: 11px; letter-spacing: 0.04em; }
+.footer-privacy-link { color: rgba(255,253,244,0.3); font-size: 11px; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.footer-privacy-link:hover { color: rgba(255,253,244,0.7); }
 
 .footer-credit {
   width: 100%;

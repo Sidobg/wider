@@ -729,6 +729,7 @@ export default function Home() {
           <div className="footer-bottom">
             <p>{tr.footer.rights}</p>
             <p>{tr.footer.tagline}</p>
+            <a href="/privacy" className="footer-privacy-link">{lang === "it" ? "Privacy Policy" : "Privacy Policy"}</a>
           </div>
           <div className="footer-credit">
             <p>{tr.footer.credit} <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
