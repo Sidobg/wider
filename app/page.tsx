@@ -138,7 +138,7 @@ function ProductCard({
       <div className="dest-card-content">
         <div className="dest-card-nome">{nome}</div>
         {prezzo && (
-          <div className={`dest-card-prezzo${prezzo === 'Sold out' ? ' sold-out' : ''}`}>{prezzo}</div>
+          <div className={`dest-card-prezzo${prezzo === 'Not available yet' ? ' sold-out' : ''}`}>{prezzo}</div>
         )}
         <button className="dest-card-btn">
           <span>{cta}</span>

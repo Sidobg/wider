@@ -44,7 +44,7 @@ export const t = {
       products: [
         { nome: 'Cappello Beige',  prezzo: '€25'        },
         { nome: 'Cappello Verde',  prezzo: '€25'        },
-        { nome: 'Cowboy',          prezzo: 'Sold out'   },
+        { nome: 'Cowboy',          prezzo: 'Not available yet'   },
         { nome: 'Foulard',         prezzo: '€37'        },
         { nome: 'Long Sleeve',     prezzo: '€55'        },
         { nome: 'T-Shirt Verde',   prezzo: '€45'        },
@@ -152,7 +152,7 @@ export const t = {
       products: [
         { nome: 'Beige Hat',       prezzo: '€25'        },
         { nome: 'Green Hat',       prezzo: '€25'        },
-        { nome: 'Cowboy',          prezzo: 'Sold out'   },
+        { nome: 'Cowboy',          prezzo: 'Not available yet'   },
         { nome: 'Foulard',         prezzo: '€37'        },
         { nome: 'Long Sleeve',     prezzo: '€55'        },
         { nome: 'Green T-Shirt',   prezzo: '€45'        },
