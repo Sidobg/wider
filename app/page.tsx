@@ -166,6 +166,7 @@ export default function Home() {
   const [modalOpenTime,  setModalOpenTime]  = useState(0);
 
   const nameRef      = useRef<HTMLInputElement>(null);
+  const surnameRef   = useRef<HTMLInputElement>(null);
   const emailRef     = useRef<HTMLInputElement>(null);
   const messageRef   = useRef<HTMLTextAreaElement>(null);
   const honeypotRef  = useRef<HTMLInputElement>(null);
@@ -415,6 +416,7 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: nameRef.current?.value,
+          surname: surnameRef.current?.value,
           email: emailRef.current?.value,
           product: modalProduct,
           message: messageRef.current?.value,
@@ -677,6 +679,10 @@ export default function Home() {
             <div className="form-group">
               <label>{tr.modal.name}</label>
               <input ref={nameRef} type="text" placeholder={tr.modal.namePlaceholder} required />
+            </div>
+            <div className="form-group">
+              <label>{tr.modal.surname}</label>
+              <input ref={surnameRef} type="text" placeholder={tr.modal.surnamePlaceholder} required />
             </div>
             <div className="form-group">
               <label>{tr.modal.email}</label>

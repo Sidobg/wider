@@ -26,7 +26,7 @@ function buildRaw(to: string, subject: string, html: string, fromName: string, r
   return Buffer.from(lines.join("\r\n")).toString("base64url");
 }
 
-function htmlWider(name: string, email: string, product: string, message: string) {
+function htmlWider(name: string, surname: string, email: string, product: string, message: string) {
   return `<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -51,7 +51,7 @@ function htmlWider(name: string, email: string, product: string, message: string
         </tr>
         <tr>
           <td style="background:#FFFDF4;padding:40px;">
-            <h2 style="margin:0 0 8px;font-size:22px;font-weight:400;color:#04210E;font-family:Georgia,serif;">${name}</h2>
+            <h2 style="margin:0 0 8px;font-size:22px;font-weight:400;color:#04210E;font-family:Georgia,serif;">${name} ${surname}</h2>
             <p style="margin:0 0 32px;font-size:13px;color:#5D5449;">
               <a href="mailto:${email}" style="color:#5D5449;text-decoration:none;">${email}</a>
             </p>
@@ -70,7 +70,7 @@ function htmlWider(name: string, email: string, product: string, message: string
                 <a href="mailto:${email}"
                   style="display:inline-block;background:#04210E;color:#FFFDF4;text-decoration:none;
                          font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:14px 32px;border-radius:4px;">
-                  Rispondi a ${name}
+                  Rispondi a ${name} ${surname}
                 </a>
               </td></tr>
             </table>
@@ -176,9 +176,9 @@ function htmlCliente(name: string, product: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, product, message, hp, openedAt } = await req.json();
+    const { name, surname, email, product, message, hp, openedAt } = await req.json();
 
-    if (!name || !email) {
+    if (!name || !surname || !email) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
@@ -202,10 +202,10 @@ export async function POST(req: NextRequest) {
         requestBody: {
           raw: buildRaw(
             process.env.GMAIL_USER!,
-            `Nuova richiesta da ${name}${product ? ` — ${product}` : ""}`,
-            htmlWider(name, email, product, message),
+            `Nuova richiesta da ${name} ${surname}${product ? ` — ${product}` : ""}`,
+            htmlWider(name, surname, email, product, message),
             "WIDER",
-            `${name} <${email}>`
+            `${name} ${surname} <${email}>`
           ),
           labelIds: ["INBOX", "UNREAD"],
         },
