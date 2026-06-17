@@ -182,19 +182,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
+    console.log("[contact] received:", { name, surname, email, product, hp: !!hp, openedAt, timeDiff: openedAt ? Date.now() - openedAt : null });
+    console.log("[contact] env vars:", { GMAIL_USER: process.env.GMAIL_USER, hasClientId: !!process.env.GMAIL_CLIENT_ID, hasSecret: !!process.env.GMAIL_CLIENT_SECRET, hasRefresh: !!process.env.GMAIL_REFRESH_TOKEN });
+
     // Honeypot: se il campo nascosto è stato compilato è un bot
     if (hp) {
+      console.log("[contact] blocked: honeypot");
       return NextResponse.json({ success: true });
     }
 
     // Tempo minimo: meno di 3 secondi = bot
     if (openedAt && Date.now() - openedAt < 3000) {
+      console.log("[contact] blocked: timing check", Date.now() - openedAt, "ms");
       return NextResponse.json({ success: true });
     }
 
     const auth = getOAuth2Client();
     const gmail = google.gmail({ version: "v1", auth });
 
+    console.log("[contact] sending emails...");
     await Promise.all([
       // Notifica a WIDER — inserita direttamente in inbox (no SMTP, no bounce, no spam filter)
       gmail.users.messages.insert({
@@ -224,6 +230,7 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
+    console.log("[contact] emails sent successfully");
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Email error:", err);
