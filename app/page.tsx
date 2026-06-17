@@ -675,7 +675,7 @@ export default function Home() {
           <h3>{tr.modal.title}</h3>
           <p className="modal-subtitle">{tr.modal.subtitle}</p>
           <form onSubmit={handleSubmit}>
-            <input ref={honeypotRef} type="text" name="website" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }} />
+            <input ref={honeypotRef} type="text" name="wider_hp_field" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none", height: 0, width: 0 }} />
             <div className="form-group">
               <label>{tr.modal.name}</label>
               <input ref={nameRef} type="text" placeholder={tr.modal.namePlaceholder} required />
