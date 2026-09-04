@@ -59,6 +59,8 @@ function ProductCard({
   photos,
   cta,
   prezzo,
+  soldOut,
+  soldOutLabel,
   objectPosition = "center",
   onRequest,
   onZoom,
@@ -67,6 +69,8 @@ function ProductCard({
   photos: string[];
   cta: string;
   prezzo?: string;
+  soldOut?: boolean;
+  soldOutLabel?: string;
   objectPosition?: string;
   onRequest: () => void;
   onZoom: (photos: string[], idx: number, nome: string) => void;
@@ -138,7 +142,10 @@ function ProductCard({
       <div className="dest-card-content">
         <div className="dest-card-nome">{nome}</div>
         {prezzo && (
-          <div className={`dest-card-prezzo${prezzo === 'Not available yet' ? ' sold-out' : ''}`}>{prezzo}</div>
+          <div className={`dest-card-prezzo${prezzo === 'Not available yet' ? ' sold-out' : ''}`}>
+            <span>{prezzo}</span>
+            {soldOut && <span className="dest-card-soldout">{soldOutLabel}</span>}
+          </div>
         )}
         <button className="dest-card-btn">
           <span>{cta}</span>
@@ -187,6 +194,7 @@ export default function Home() {
   const products = tr.collezione.products.map((p, i) => ({
     nome: p.nome,
     prezzo: p.prezzo,
+    soldOut: p.soldOut,
     photos: productPhotos[i] ?? [],
   }));
 
@@ -552,6 +560,8 @@ export default function Home() {
               photos={productPhotos[i].photos}
               objectPosition={productPhotos[i].objectPosition}
               prezzo={p.prezzo}
+              soldOut={p.soldOut}
+              soldOutLabel={tr.collezione.soldOut}
               cta={tr.collezione.cta}
               onRequest={() => openModal(p.nome)}
               onZoom={(photos, idx, nome) => setLightbox({ photos, idx, nome })}

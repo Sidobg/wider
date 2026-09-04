@@ -733,6 +733,9 @@ nav.scrolled       .hamburger span { background: var(--nero); }
 
 .dest-card-prezzo {
   margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -745,6 +748,23 @@ nav.scrolled       .hamburger span { background: var(--nero); }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0.45;
+}
+
+.dest-card-soldout {
+  display: inline-block;
+  padding: 3px 9px;
+  border: 1px solid rgba(255, 253, 244, 0.38);
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--panna);
+  background: rgba(4, 33, 14, 0.35);
+  backdrop-filter: blur(2px);
+  opacity: 0.85;
 }
 
 .dest-card-btn {
