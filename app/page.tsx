@@ -41,6 +41,7 @@ const galleryImgs = [
 ];
 
 const productSlugs = [
+  { slug: "new-long-sleeve", count: 9 },
   { slug: "cappello-beige",  count: 3 },
   { slug: "cappello-verde",  count: 4 },
   { slug: "cowboy",          count: 9 },
@@ -197,12 +198,16 @@ export default function Home() {
     description: item.description,
     imageSrc: galleryImgs[i],
   }));
-  const products = tr.collezione.products.map((p, i) => ({
-    nome: p.nome,
-    prezzo: p.prezzo,
-    soldOut: p.soldOut,
-    photos: productPhotos[i] ?? [],
-  }));
+  const products = tr.collezione.products
+    .map((p, i) => ({
+      nome: p.nome,
+      prezzo: p.prezzo,
+      soldOut: p.soldOut,
+      hidden: p.hidden,
+      photos: productPhotos[i]?.photos ?? [],
+      objectPosition: productPhotos[i]?.objectPosition ?? "center",
+    }))
+    .filter((p) => !p.hidden);
 
   const manifestoRef = useRef<HTMLHeadingElement>(null);
 
@@ -563,8 +568,8 @@ export default function Home() {
             <ProductCard
               key={i}
               nome={p.nome}
-              photos={productPhotos[i].photos}
-              objectPosition={productPhotos[i].objectPosition}
+              photos={p.photos}
+              objectPosition={p.objectPosition}
               prezzo={p.prezzo}
               soldOut={p.soldOut}
               soldOutLabel={tr.collezione.soldOut}

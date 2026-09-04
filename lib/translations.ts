@@ -43,13 +43,16 @@ export const t = {
       sizeGuideTshirt: 'Guida alle taglie T-Shirt',
       soldOut: 'Sold out',
       products: [
-        { nome: 'Cappello Beige',  prezzo: '€25',              soldOut: false },
-        { nome: 'Cappello Verde',  prezzo: '€25',              soldOut: true  },
-        { nome: 'Cowboy',          prezzo: 'Not available yet', soldOut: false },
-        { nome: 'Foulard',         prezzo: '€37',              soldOut: true  },
-        { nome: 'Long Sleeve',     prezzo: '€55',              soldOut: true  },
-        { nome: 'T-Shirt Verde',   prezzo: '€45',              soldOut: false },
-        { nome: 'T-Shirt Bianca',  prezzo: '€45',              soldOut: false },
+        // hidden: true = non compare sul sito (né in griglia né nella tendina del form).
+        // Per pubblicarlo basta metterlo a false e fare push.
+        { nome: 'New Long Sleeve', prezzo: '€55',              soldOut: false, hidden: true  },
+        { nome: 'Cappello Beige',  prezzo: '€25',              soldOut: false, hidden: false },
+        { nome: 'Cappello Verde',  prezzo: '€25',              soldOut: true,  hidden: false },
+        { nome: 'Cowboy',          prezzo: 'Not available yet', soldOut: false, hidden: false },
+        { nome: 'Foulard',         prezzo: '€37',              soldOut: true,  hidden: false },
+        { nome: 'Long Sleeve',     prezzo: '€55',              soldOut: true,  hidden: false },
+        { nome: 'T-Shirt Verde',   prezzo: '€45',              soldOut: false, hidden: false },
+        { nome: 'T-Shirt Bianca',  prezzo: '€45',              soldOut: false, hidden: false },
       ],
     },
     gallery: {
@@ -154,13 +157,15 @@ export const t = {
       sizeGuideTshirt: 'T-Shirt size guide',
       soldOut: 'Sold out',
       products: [
-        { nome: 'Beige Hat',       prezzo: '€25',              soldOut: false },
-        { nome: 'Green Hat',       prezzo: '€25',              soldOut: true  },
-        { nome: 'Cowboy',          prezzo: 'Not available yet', soldOut: false },
-        { nome: 'Foulard',         prezzo: '€37',              soldOut: true  },
-        { nome: 'Long Sleeve',     prezzo: '€55',              soldOut: true  },
-        { nome: 'Green T-Shirt',   prezzo: '€45',              soldOut: false },
-        { nome: 'White T-Shirt',   prezzo: '€45',              soldOut: false },
+        // hidden: true = hidden from the site (grid and form dropdown alike).
+        { nome: 'New Long Sleeve', prezzo: '€55',              soldOut: false, hidden: true  },
+        { nome: 'Beige Hat',       prezzo: '€25',              soldOut: false, hidden: false },
+        { nome: 'Green Hat',       prezzo: '€25',              soldOut: true,  hidden: false },
+        { nome: 'Cowboy',          prezzo: 'Not available yet', soldOut: false, hidden: false },
+        { nome: 'Foulard',         prezzo: '€37',              soldOut: true,  hidden: false },
+        { nome: 'Long Sleeve',     prezzo: '€55',              soldOut: true,  hidden: false },
+        { nome: 'Green T-Shirt',   prezzo: '€45',              soldOut: false, hidden: false },
+        { nome: 'White T-Shirt',   prezzo: '€45',              soldOut: false, hidden: false },
       ],
     },
     gallery: {
