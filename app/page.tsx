@@ -91,7 +91,10 @@ function ProductCard({
   };
 
   return (
-    <div className="dest-card fade-up" onClick={onRequest}>
+    <div
+      className={`dest-card fade-up${soldOut ? " is-soldout" : ""}`}
+      onClick={soldOut ? undefined : onRequest}
+    >
       {photos.map((src, i) => (
         <div
           key={i}
@@ -142,17 +145,20 @@ function ProductCard({
       <div className="dest-card-content">
         <div className="dest-card-nome">{nome}</div>
         {prezzo && (
-          <div className={`dest-card-prezzo${prezzo === 'Not available yet' ? ' sold-out' : ''}`}>
-            <span>{prezzo}</span>
-            {soldOut && <span className="dest-card-soldout">{soldOutLabel}</span>}
-          </div>
+          <div className={`dest-card-prezzo${prezzo === 'Not available yet' ? ' sold-out' : ''}`}>{prezzo}</div>
         )}
-        <button className="dest-card-btn">
-          <span>{cta}</span>
-          <svg className="dest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
+        <button
+          className={`dest-card-btn${soldOut ? " is-soldout" : ""}`}
+          disabled={soldOut}
+          aria-disabled={soldOut}
+        >
+          <span>{soldOut ? soldOutLabel : cta}</span>
+          {!soldOut && (
+            <svg className="dest-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          )}
         </button>
       </div>
     </div>
