@@ -45,7 +45,7 @@ export const t = {
       products: [
         // hidden: true = non compare sul sito (né in griglia né nella tendina del form).
         // Per pubblicarlo basta metterlo a false e fare push.
-        { nome: 'New Long Sleeve', prezzo: '€55',              soldOut: false, hidden: true  },
+        { nome: 'Soft Golfing Club Long Sleeve', prezzo: '€55', soldOut: false, hidden: false },
         { nome: 'Cappello Beige',  prezzo: '€25',              soldOut: false, hidden: false },
         { nome: 'Cappello Verde',  prezzo: '€25',              soldOut: true,  hidden: false },
         { nome: 'Cowboy',          prezzo: 'Not available yet', soldOut: false, hidden: false },
@@ -158,7 +158,7 @@ export const t = {
       soldOut: 'Sold out',
       products: [
         // hidden: true = hidden from the site (grid and form dropdown alike).
-        { nome: 'New Long Sleeve', prezzo: '€55',              soldOut: false, hidden: true  },
+        { nome: 'Soft Golfing Club Long Sleeve', prezzo: '€55', soldOut: false, hidden: false },
         { nome: 'Beige Hat',       prezzo: '€25',              soldOut: false, hidden: false },
         { nome: 'Green Hat',       prezzo: '€25',              soldOut: true,  hidden: false },
         { nome: 'Cowboy',          prezzo: 'Not available yet', soldOut: false, hidden: false },

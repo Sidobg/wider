@@ -41,7 +41,7 @@ const galleryImgs = [
 ];
 
 const productSlugs = [
-  { slug: "new-long-sleeve", count: 9 },
+  { slug: "soft-golfing-club", count: 9 },
   { slug: "cappello-beige",  count: 3 },
   { slug: "cappello-verde",  count: 4 },
   { slug: "cowboy",          count: 9 },
