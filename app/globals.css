@@ -1118,3 +1118,11 @@ footer {
   .fai-firma{transition:none}
   .fai-firma:hover{transform:none}
 }
+
+/* Su questo sito la firma sta molto piu' piccola di quella di serie: il
+   marchio del cliente e' il logo WIDER sopra, questa deve solo firmare.
+   La regola copiata dal file aziendale resta com'e'; la misura si cambia
+   qui. Il minimo resta sopra i 68px, sotto i quali il blocco AI si chiude
+   e non si legge piu'. */
+footer .fai-firma__segno{width:clamp(76px,7vw,84px)}
+footer .fai-firma__occhiello{font-size:9px;letter-spacing:.2em}
