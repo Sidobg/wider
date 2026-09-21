@@ -9,6 +9,7 @@ import { WorldMap } from "@/components/ui/map";
 import { AnimatedText } from "@/components/ui/animated-shiny-text";
 import VaporizeTextCycle, { Tag } from "@/components/ui/vapour-text-effect";
 import { t, type Lang } from "@/lib/translations";
+import Firma from "@/components/Firma";
 
 const MILANO = { lat: 45.4642, lng: 9.19, label: "Milano" };
 const communityDots = [
@@ -763,7 +764,9 @@ export default function Home() {
             </a>
           </div>
           <div className="footer-credit">
-            <p>{tr.footer.credit} <a href="https://www.futureai.it" target="_blank" rel="noopener noreferrer">FUTURE AI</a></p>
+            {/* L'occhiello resta quello tradotto: "Sito realizzato da" in
+                italiano, "Website created by" in inglese. */}
+            <Firma testo={tr.footer.credit} />
           </div>
         </div>
       </footer>

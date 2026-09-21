@@ -1103,3 +1103,18 @@ footer {
   .footer-inner { gap: 24px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
+/* Firma FUTURE AI — copia di _azienda/firma/firma.css, non modificare qui */
+.fai-firma{display:inline-flex;flex-direction:column;gap:.9em;align-items:flex-start;
+  text-decoration:none;color:inherit;border:0;
+  transition:opacity .22s cubic-bezier(.2,.7,.3,1),transform .22s cubic-bezier(.2,.7,.3,1)}
+.fai-firma:hover{opacity:.78;transform:translateY(-2px)}
+.fai-firma:focus-visible{outline:2px solid currentColor;outline-offset:6px;border-radius:2px}
+.fai-firma--destra{align-items:flex-end}
+.fai-firma__occhiello{font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  font-weight:500;line-height:1;opacity:.5}
+.fai-firma__segno{display:block;width:clamp(128px,15vw,168px);height:auto;color:inherit}
+@media (prefers-reduced-motion:reduce){
+  .fai-firma{transition:none}
+  .fai-firma:hover{transform:none}
+}
