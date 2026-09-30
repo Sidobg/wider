@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "WIDER — Un universo da vivere",
@@ -23,6 +24,16 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+
+        {/* Conteggio delle visite di Vercel. Senza cookie e senza
+            identificatori sul dispositivo: lo script parte dal dominio del
+            sito (/_vercel/insights), non da un server terzo. Per questo non
+            passa dal consenso cookie qui sotto — non c'e' niente da
+            consentire. Resta pero' un trattamento e va dichiarato
+            nell'informativa, che per questo sito e' un documento Legal Blink
+            e si aggiorna da li'. */}
+        <Analytics />
+
         <script type="text/javascript" src="https://app.legalblink.it/api/scripts/lb_cs.js" async />
         <script id="lb_cs" type="text/javascript" dangerouslySetInnerHTML={{ __html: 'lb_cs("6a2f270b0000de0029a6d9e4");' }} />
       </body>
