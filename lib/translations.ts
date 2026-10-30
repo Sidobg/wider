@@ -45,6 +45,8 @@ export const t = {
       products: [
         // hidden: true = non compare sul sito (né in griglia né nella tendina del form).
         // Per pubblicarlo basta metterlo a false e fare push.
+        // dettagli = righe tecniche mostrate a chip sotto il prezzo (opzionale).
+        { nome: 'WTM Serafino Sweatshirt', prezzo: '€60', soldOut: false, hidden: false, dettagli: ['Made in Italy', '100% cotone', '350 gsm sgarzata'] },
         { nome: 'Soft Golfing Club Long Sleeve', prezzo: '€55', soldOut: false, hidden: false },
         { nome: 'Cappello Beige',  prezzo: '€25',              soldOut: false, hidden: false },
         { nome: 'Cappello Verde',  prezzo: '€25',              soldOut: true,  hidden: false },
@@ -158,6 +160,8 @@ export const t = {
       soldOut: 'Sold out',
       products: [
         // hidden: true = hidden from the site (grid and form dropdown alike).
+        // dettagli = technical lines shown as chips below the price (optional).
+        { nome: 'WTM Serafino Sweatshirt', prezzo: '€60', soldOut: false, hidden: false, dettagli: ['Made in Italy', '100% cotton', '350 gsm brushed'] },
         { nome: 'Soft Golfing Club Long Sleeve', prezzo: '€55', soldOut: false, hidden: false },
         { nome: 'Beige Hat',       prezzo: '€25',              soldOut: false, hidden: false },
         { nome: 'Green Hat',       prezzo: '€25',              soldOut: true,  hidden: false },

@@ -42,6 +42,7 @@ const galleryImgs = [
 ];
 
 const productSlugs = [
+  { slug: "wtm-serafino-sweatshirt", count: 11 },
   { slug: "soft-golfing-club", count: 9 },
   { slug: "cappello-beige",  count: 3 },
   { slug: "cappello-verde",  count: 4 },
@@ -61,6 +62,7 @@ function ProductCard({
   photos,
   cta,
   prezzo,
+  dettagli,
   soldOut,
   soldOutLabel,
   objectPosition = "center",
@@ -71,6 +73,7 @@ function ProductCard({
   photos: string[];
   cta: string;
   prezzo?: string;
+  dettagli?: readonly string[];
   soldOut?: boolean;
   soldOutLabel?: string;
   objectPosition?: string;
@@ -149,6 +152,13 @@ function ProductCard({
         {prezzo && (
           <div className={`dest-card-prezzo${prezzo === 'Not available yet' ? ' sold-out' : ''}`}>{prezzo}</div>
         )}
+        {dettagli && dettagli.length > 0 && (
+          <div className="dest-card-specs">
+            {dettagli.map((d, i) => (
+              <span key={i} className="dest-card-spec">{d}</span>
+            ))}
+          </div>
+        )}
         <button
           className={`dest-card-btn${soldOut ? " is-soldout" : ""}`}
           disabled={soldOut}
@@ -205,6 +215,7 @@ export default function Home() {
       prezzo: p.prezzo,
       soldOut: p.soldOut,
       hidden: p.hidden,
+      dettagli: (p as { dettagli?: readonly string[] }).dettagli ?? [],
       photos: productPhotos[i]?.photos ?? [],
       objectPosition: productPhotos[i]?.objectPosition ?? "center",
     }))
@@ -572,6 +583,7 @@ export default function Home() {
               photos={p.photos}
               objectPosition={p.objectPosition}
               prezzo={p.prezzo}
+              dettagli={p.dettagli}
               soldOut={p.soldOut}
               soldOutLabel={tr.collezione.soldOut}
               cta={tr.collezione.cta}
